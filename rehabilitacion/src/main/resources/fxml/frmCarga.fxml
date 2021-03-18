@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import java.net.URL?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -14,21 +13,9 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane id="AnchorPane" prefHeight="401.0" prefWidth="607.0" style="-fx-background-radius: 20;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.boot.controller.FrmCargaController">
-    <stylesheets>
-        <URL value="@/styles/frmcarga.css" />
-    </stylesheets>
+<AnchorPane id="AnchorPane" prefHeight="401.0" prefWidth="800.0" style="-fx-background-radius: 20;" styleClass="pane" stylesheets="@../styles/frmcarga.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.boot.controller.FrmCargaController">
    <children>
-      <Pane layoutY="5.0" prefHeight="394.0" prefWidth="299.0" style="-fx-background-radius: 20; -fx-background-color: #ffff;" AnchorPane.leftAnchor="5.0">
-         <children>
-            <ImageView fitHeight="373.0" fitWidth="269.0" layoutX="15.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/ambulancia.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <Pane layoutX="304.0" layoutY="5.0" prefHeight="394.0" prefWidth="299.0" style="-fx-background-radius: 20;">
+      <Pane layoutX="487.0" layoutY="4.0" prefHeight="394.0" prefWidth="299.0" style="-fx-background-radius: 20;">
          <children>
             <Label layoutX="103.0" layoutY="14.0" text="FISIOSPA" textFill="#3b4859">
                <font>
@@ -36,8 +23,8 @@
                </font>
             </Label>
             <Label layoutX="80.0" layoutY="70.0" text="Inicia Sesión con tu Cuenta" textFill="#3b4859" />
-            <TextField fx:id="txtuser" alignment="CENTER" layoutX="34.0" layoutY="100.0" prefHeight="25.0" prefWidth="238.0" promptText="Usuario" style="-fx-background-radius: 10;" />
-            <PasswordField fx:id="txtpassword" alignment="CENTER" layoutX="31.0" layoutY="143.0" prefHeight="25.0" prefWidth="238.0" promptText="Password" style="-fx-background-radius: 10;" />
+            <TextField fx:id="txtuser" alignment="CENTER" layoutX="34.0" layoutY="100.0" prefHeight="25.0" prefWidth="238.0" promptText="Usuario" style="-fx-background-radius: 10;" styleClass="text-input" stylesheets="@../styles/frmcarga.css" />
+            <PasswordField fx:id="txtpassword" alignment="CENTER" layoutX="34.0" layoutY="143.0" prefHeight="25.0" prefWidth="238.0" promptText="Password" style="-fx-background-radius: 10;" />
             <Label layoutX="31.0" layoutY="180.0" text="¿Olvidaste tu " />
             <JFXButton layoutX="93.0" layoutY="176.0" prefHeight="25.0" prefWidth="85.0" ripplerFill="#ebebeb" text="contraseña?">
                <font>
@@ -78,6 +65,11 @@
                </cursor></JFXButton>
             <FontIcon iconColor="#3b4859" iconLiteral="mdi-account" iconSize="20" layoutX="40.0" layoutY="120.0" wrappingWidth="18.0" />
             <FontIcon iconColor="#3b4859" iconLiteral="mdi-key-variant" iconSize="20" layoutX="39.0" layoutY="163.0" />
+            <ImageView fx:id="progress" fitHeight="150.0" fitWidth="200.0" layoutX="50.0" layoutY="269.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/charge.gif" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

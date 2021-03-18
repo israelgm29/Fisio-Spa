@@ -1,4 +1,3 @@
-
 package com.boot.controller;
 
 import com.boot.models.Administrador;
@@ -20,8 +19,7 @@ import javafx.stage.Stage;
  * @author Jhonatan
  */
 public class FrmPrincipalController implements Initializable {
-   
- 
+
     @FXML
     private HBox advancevboc1;
 
@@ -39,22 +37,30 @@ public class FrmPrincipalController implements Initializable {
 
     @FXML
     private MenuButton usrname;
-    
+
     @FXML
     private BorderPane principal;
-    
-    @FXML
-    private Label code;
 
-    
-    public void setFirstname( String firstNameString){
-     code.setText(firstNameString);
+  
+
+    private static FrmPrincipalController instance;
+
+    public FrmPrincipalController() {
+        instance = this;
     }
-    
-    
+
+    public static FrmPrincipalController getInstance() {
+        return instance;
+    }
+
+   
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-     
-    }    
-    
+        setFirstname(FrmCargaController.getInstance().username());
+    }
+     public void setFirstname(String firstNameString) {
+       this.usrname.setText(firstNameString);
+    }
+
 }

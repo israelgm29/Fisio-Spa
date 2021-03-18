@@ -25,6 +25,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
@@ -50,6 +52,22 @@ public class FrmCargaController implements Initializable {
 
     private String nombre;
 
+    private static FrmCargaController instance;
+    @FXML
+    private ImageView progress;
+
+    public FrmCargaController() {
+        instance = this;
+    }
+
+    public static FrmCargaController getInstance() {
+        return instance;
+    }
+
+    public String username() {
+        return txtuser.getText();
+    }
+
     @FXML
     void closeApp(ActionEvent event) {
         Alert close = new Alert(Alert.AlertType.CONFIRMATION);
@@ -63,7 +81,7 @@ public class FrmCargaController implements Initializable {
     }
 
     @FXML
-    public void login(ActionEvent event) throws IOException {
+    void login(ActionEvent event) throws IOException {
         if (this.txtuser.getText().isEmpty() || this.txtpassword.getText().isEmpty()) {
             Alert message = new Alert(Alert.AlertType.ERROR);
             message.setTitle("FISIOSPA");
@@ -81,19 +99,14 @@ public class FrmCargaController implements Initializable {
                 message.showAndWait();
                 ((Node) (event.getSource())).getScene().getWindow().hide();
 
-                // Cargo la vista
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/frmPrincipal.fxml"));
-                // Cargo la ventana
-                Parent root = loader.load();
-                // Cargo el controlador
-                FrmPrincipalController controlador = (FrmPrincipalController) loader.getController();
-                controlador.setFirstname(this.txtuser.getText());
+                Stage home = new Stage();
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/frmPrincipal.fxml"));
+
                 Scene scene = new Scene(root);
-                Stage newStage = new Stage();
-                newStage.setScene(scene);
-                newStage.show();
+                home.setScene(scene);
+                home.show();
             } catch (Exception e) {
-               Logger.getLogger(FrmCargaController.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(FrmCargaController.class.getName()).log(Level.SEVERE, null, e);
             }
 
         } else {
@@ -134,6 +147,7 @@ public class FrmCargaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        progress.setVisible(false);
 
     }
 
