@@ -30,7 +30,7 @@
                         <Image url="@../images/atencion-medica.png" />
                      </image>
                   </ImageView>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-fill: #476d8a;" text="Terapias">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-fill: #476d8a;" text="Atención">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>

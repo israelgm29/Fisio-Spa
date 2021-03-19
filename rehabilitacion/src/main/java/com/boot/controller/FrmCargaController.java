@@ -53,8 +53,10 @@ public class FrmCargaController implements Initializable {
     private String nombre;
 
     private static FrmCargaController instance;
+ 
+    
     @FXML
-    private ImageView progress;
+    private JFXButton btnRegistrer;
 
     public FrmCargaController() {
         instance = this;
@@ -81,7 +83,7 @@ public class FrmCargaController implements Initializable {
     }
 
     @FXML
-    void login(ActionEvent event) throws IOException {
+    private void login(ActionEvent event) throws IOException {
         if (this.txtuser.getText().isEmpty() || this.txtpassword.getText().isEmpty()) {
             Alert message = new Alert(Alert.AlertType.ERROR);
             message.setTitle("FISIOSPA");
@@ -147,8 +149,24 @@ public class FrmCargaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        progress.setVisible(false);
+      
 
+    }
+
+
+    @FXML
+    private void SingUp(ActionEvent event) {
+        try {
+            Stage signup = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/frmRegistrar.fxml"));
+            
+            Scene scene = new Scene(root);
+            signup.setScene(scene);
+            signup.show();
+           
+        } catch (IOException ex) {
+            Logger.getLogger(FrmCargaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

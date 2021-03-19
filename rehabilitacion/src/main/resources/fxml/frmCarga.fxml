@@ -6,8 +6,6 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -15,7 +13,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="401.0" prefWidth="800.0" style="-fx-background-radius: 20;" styleClass="pane" stylesheets="@../styles/frmcarga.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.boot.controller.FrmCargaController">
    <children>
-      <Pane layoutX="487.0" layoutY="4.0" prefHeight="394.0" prefWidth="299.0" style="-fx-background-radius: 20;">
+      <Pane layoutX="251.0" layoutY="4.0" prefHeight="394.0" prefWidth="299.0" style="-fx-background-radius: 20;">
          <children>
             <Label layoutX="103.0" layoutY="14.0" text="FISIOSPA" textFill="#3b4859">
                <font>
@@ -35,7 +33,7 @@
                </cursor>
            
             </JFXButton>
-           <JFXButton fx:id="btnLogin" layoutX="74.0" layoutY="215.0" onAction="#login" onKeyPressed="#login" prefHeight="25.0" prefWidth="159.0" ripplerFill="#476d8a" style="-fx-background-color: #3b4859; -fx-background-radius: 10;" text="Iniciar Sesión" textFill="WHITE">
+           <JFXButton fx:id="btnLogin" layoutX="74.0" layoutY="215.0" onAction="#login" onKeyPressed="#login" prefHeight="25.0" prefWidth="159.0" ripplerFill="#64b3eb" style="-fx-background-color: #3b4859; -fx-background-radius: 10;" text="Iniciar Sesión" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
@@ -46,8 +44,8 @@
             </JFXButton>
             <Separator layoutX="8.0" layoutY="296.0" prefHeight="12.0" prefWidth="110.0" />
             <Separator layoutX="178.0" layoutY="296.0" prefHeight="12.0" prefWidth="110.0" />
-            <Label layoutX="14.0" layoutY="332.0" text="No tienes cuenta?" />
-            <JFXButton layoutX="118.0" layoutY="327.0" text="Registrarse" textFill="#3b4859">
+            <Label layoutX="40.0" layoutY="331.0" text="No tienes cuenta?" />
+            <JFXButton fx:id="btnRegistrer" layoutX="144.0" layoutY="326.0" onAction="#SingUp" text="Registrarse" textFill="#3b4859">
            
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -56,21 +54,17 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btnCerrar" layoutX="232.0" layoutY="2.0" onAction="#closeApp" text="Cerrar">
-               <graphic>
-                  <FontIcon iconLiteral="mdi-window-close" iconSize="18" />
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></JFXButton>
             <FontIcon iconColor="#3b4859" iconLiteral="mdi-account" iconSize="20" layoutX="40.0" layoutY="120.0" wrappingWidth="18.0" />
             <FontIcon iconColor="#3b4859" iconLiteral="mdi-key-variant" iconSize="20" layoutX="39.0" layoutY="163.0" />
-            <ImageView fx:id="progress" fitHeight="150.0" fitWidth="200.0" layoutX="50.0" layoutY="269.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/charge.gif" />
-               </image>
-            </ImageView>
          </children>
       </Pane>
+      <JFXButton fx:id="btnCerrar" layoutX="715.0" layoutY="14.0" onAction="#closeApp" text="Cerrar">
+         <graphic>
+            <FontIcon iconLiteral="mdi-window-close" iconSize="18" />
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
    </children>
 </AnchorPane>
