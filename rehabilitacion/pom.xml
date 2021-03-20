@@ -41,6 +41,12 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.19.jre7</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>13</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

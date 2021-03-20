@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -11,6 +9,8 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -24,7 +24,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane fx:id="principal" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1184.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.boot.controller.FrmPrincipalController">
+<BorderPane fx:id="principal" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1184.0" stylesheets="@../styles/frmprincipal.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.boot.controller.FrmPrincipalController">
    <left>
       <VBox maxWidth="-Infinity" prefWidth="161.0" style="-fx-background-color: #ffff;" BorderPane.alignment="CENTER">
          <children>
@@ -265,27 +265,7 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Pane layoutX="6.0" layoutY="136.0" prefHeight="330.0" prefWidth="240.0" style="-fx-background-color: #FFFF; -fx-border-radius: 20; -fx-background-radius: 20;">
-               <children>
-                  <ImageView fitHeight="107.0" fitWidth="110.0" layoutX="60.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/picture.png" />
-                     </image>
-                  </ImageView>
-                  <JFXTextField disable="true" editable="false" layoutX="60.0" layoutY="200.0" />
-                  <Label layoutX="7.0" layoutY="210.0" text="Cedula :" />
-                  <JFXTextField disable="true" editable="false" layoutX="60.0" layoutY="240.0" prefHeight="25.0" prefWidth="49.0" />
-                  <Label layoutX="10.0" layoutY="249.0" text="Edad :" />
-                  <JFXTextField disable="true" editable="false" layoutX="60.0" layoutY="131.0" />
-                  <JFXTextField disable="true" editable="false" layoutX="61.0" layoutY="168.0" prefHeight="25.0" prefWidth="27.0" />
-                  <Label layoutX="6.0" layoutY="178.0" text="H.Clinica :" />
-                  <Label layoutX="117.0" layoutY="249.0" text="Años" />
-               </children>
-            </Pane>
-            <Label layoutX="467.0" layoutY="52.0" text="SIGNOS VITALES" />
-            <JFXTextField disable="true" editable="false" layoutX="109.0" layoutY="304.0" prefHeight="25.0" prefWidth="98.0" />
-            <Label layoutX="12.0" layoutY="273.0" text="Nombre :" />
-            <Pane layoutX="262.0" layoutY="136.0" prefHeight="330.0" prefWidth="741.0" style="-fx-background-color: #FFFF; -fx-background-radius: 20;">
+            <Pane layoutX="15.0" layoutY="218.0" prefHeight="330.0" prefWidth="1002.0" style="-fx-background-color: #FFFF; -fx-background-radius: 20;">
                <children>
                   <GridPane layoutX="7.0" layoutY="14.0" prefHeight="301.0" prefWidth="279.0">
                     <columnConstraints>
@@ -312,25 +292,44 @@
                         <Label text="Sintomas :" GridPane.rowIndex="5" />
                         <Label text="Antecedentes :" GridPane.rowIndex="7" />
                         <Label text="Alergias" GridPane.rowIndex="6" />
-                        <JFXTextField GridPane.columnIndex="1" />
-                        <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <JFXTextArea labelFloat="true" prefHeight="49.0" prefWidth="104.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
                      </children>
                   </GridPane>
-                  <JFXTreeTableView fx:id="tableSignos" layoutX="304.0" layoutY="72.0" onSort="#cargarTabla" prefHeight="250.0" prefWidth="416.0" />
                   <Label layoutX="309.0" layoutY="31.0" text="Buscar por :" />
-                  <JFXTextField layoutX="394.0" layoutY="27.0" prefHeight="25.0" prefWidth="267.0" />
                   <FontIcon fill="#476d8a" iconLiteral="mdi-magnify" iconSize="20" layoutX="645.0" layoutY="51.0" />
                   <Separator layoutX="286.0" layoutY="14.0" orientation="VERTICAL" prefHeight="300.0" />
+                  <TableView fx:id="tableSignos" layoutX="294.0" layoutY="73.0" onMouseClicked="#selecPaciente" prefHeight="251.0" prefWidth="700.0">
+                    <columns>
+                      <TableColumn fx:id="clmCategoria" prefWidth="67.0" text="Categoria" />
+                        <TableColumn fx:id="clmHclinica" prefWidth="60.0" text="H Clinica" />
+                      <TableColumn fx:id="clmNombre" prefWidth="113.0" text="Nombre" />
+                        <TableColumn fx:id="clmCedula" prefWidth="164.66668701171875" text="Cedula" />
+                        <TableColumn fx:id="clmEdad" prefWidth="79.33331298828125" text="Edad" />
+                        <TableColumn fx:id="clmFoto" prefWidth="75.0" text="Foto" />
+                    </columns>
+                  </TableView>
+                  <Text layoutX="139.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Atención" />
                </children>
             </Pane>
-            <Text layoutX="27.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos del Paciente" />
-            <Text layoutX="287.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Atención" />
+            <Pane layoutX="15.0" layoutY="77.0" prefHeight="119.0" prefWidth="1002.0" style="-fx-background-color: #FFFF; -fx-border-radius: 20; -fx-background-radius: 20;">
+               <children>
+                  <ImageView fx:id="imgPerfil" fitHeight="107.0" fitWidth="110.0" layoutX="62.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/picture.png" />
+                     </image>
+                  </ImageView>
+                  <Text layoutX="455.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos del Paciente" />
+                  <JFXTextField fx:id="jtxtNombre" layoutX="330.0" layoutY="22.0" />
+                  <JFXTextField layoutX="383.0" layoutY="74.0" prefHeight="25.0" prefWidth="51.0" />
+                  <JFXTextField fx:id="jtxtCateg" layoutX="335.0" layoutY="73.0" prefHeight="25.0" prefWidth="35.0" />
+                  <Label layoutX="259.0" layoutY="39.0" text="Nombre :" />
+                  <Label layoutX="259.0" layoutY="90.0" text="H Clinica" />
+                  <Label layoutX="522.0" layoutY="39.0" text="Cédula" />
+                  <Label layoutX="527.0" layoutY="82.0" text="Edad" />
+                  <JFXTextField fx:id="jtxtCedula" layoutX="605.0" layoutY="26.0" />
+                  <JFXTextField fx:id="jtxtEdad" layoutX="607.0" layoutY="74.0" />
+               </children>
+            </Pane>
+            <Text layoutX="439.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOMA DE SIGNOS VITALES" />
          </children>
       </Pane>
    </center>
