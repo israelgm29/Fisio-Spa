@@ -3,16 +3,23 @@ package com.boot.controller;
 import com.boot.dataaccess.Conexion;
 import com.boot.models.HistoriaClinica;
 import com.jfoenix.controls.JFXTextField;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -24,7 +31,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javax.imageio.ImageIO;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * FXML Controller class
@@ -73,7 +81,7 @@ public class FrmPrincipalController implements Initializable {
     private TableColumn<HistoriaClinica, Integer> clmEdad;
 
     @FXML
-    private TableColumn<HistoriaClinica, Byte[]> clmFoto;
+    private TableColumn<HistoriaClinica, String> clmFoto;
 
     @FXML
     private ImageView imgPerfil;
@@ -99,6 +107,8 @@ public class FrmPrincipalController implements Initializable {
     private static FrmPrincipalController instance; // instancia del controlador 
 
     int index = -1;
+    @FXML
+    private Circle perfil2;
 
     public FrmPrincipalController() {
         instance = this;
@@ -111,7 +121,6 @@ public class FrmPrincipalController implements Initializable {
     ObservableList<HistoriaClinica> pacientes;
     ObservableList<HistoriaClinica> filtropacientes;
 
-    @FXML
     private ObservableList<HistoriaClinica> cargarTabla() {
         ObservableList<HistoriaClinica> hclinicas = FXCollections.observableArrayList();
         Conexion con = new Conexion();
@@ -128,7 +137,7 @@ public class FrmPrincipalController implements Initializable {
                 HClinica.setCategoria(rst.getString("categoria"));
                 HClinica.setPaciente(rst.getString("paciente"));
                 HClinica.setCedula(rst.getString("cedula"));
-                HClinica.setImagen(rst.getBytes("foto"));
+                HClinica.setImagen(rst.getString("foto"));
                 HClinica.setEdad(rst.getInt("edad"));
 //                lista.add(HClinica);
                 hclinicas.add(HClinica);
@@ -152,7 +161,7 @@ public class FrmPrincipalController implements Initializable {
         this.clmNombre.setCellValueFactory(new PropertyValueFactory<HistoriaClinica, String>("paciente"));
         this.clmCedula.setCellValueFactory(new PropertyValueFactory<HistoriaClinica, String>("cedula"));
         this.clmEdad.setCellValueFactory(new PropertyValueFactory<HistoriaClinica, Integer>("edad"));
-        this.clmFoto.setCellValueFactory(new PropertyValueFactory<HistoriaClinica, Byte[]>("imagen"));
+        this.clmFoto.setCellValueFactory(new PropertyValueFactory<HistoriaClinica, String>("imagen"));
         this.clmFoto.setVisible(false);
         //llenar tabla
         this.tableSignos.setItems(pacientes);
@@ -165,18 +174,23 @@ public class FrmPrincipalController implements Initializable {
 
     @FXML
     private void selecPaciente(MouseEvent event) {
+    
         index = tableSignos.getSelectionModel().getSelectedIndex();
         if (index <= -1) {
             return;
         }
-
         jtxtCateg.setText(clmCategoria.getCellData(index).toString());
         jtxtNombre.setText(clmNombre.getCellData(index).toString());
         jtxtCedula.setText(clmCedula.getCellData(index).toString());
         jtxtEdad.setText(clmEdad.getCellData(index).toString());
         jtxthClinica.setText(clmHclinica.getCellData(index).toString());
-        byte[] byteArray = null; //need to initialize it
-      
+        Image perfil = new Image(clmFoto.getCellData(index));
+        imgPerfil.setImage(perfil);
+        perfil2.setFill(new ImagePattern(perfil));
+        
+     
+ 
+
     }
 
     @FXML
