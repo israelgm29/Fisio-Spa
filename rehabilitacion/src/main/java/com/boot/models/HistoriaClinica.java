@@ -24,7 +24,7 @@ public class HistoriaClinica {
     private Double estatura;
     private Double peso;
     private String ocupacion;
-    private byte[] imagen;
+    private String imagen;
     private Date fecha;
     private int enfermero;
     private String categoria;
@@ -32,7 +32,7 @@ public class HistoriaClinica {
     public HistoriaClinica() {
     }
 
-    public HistoriaClinica(int codigo, String paciente, String cedula, String telefono, int edad, String sexo, String direccion, Date fecha_nacimiento, String mail, Double estatura, Double peso, String ocupacion, byte[] imagen, Date fecha, int enfermero, String categoria) {
+    public HistoriaClinica(int codigo, String paciente, String cedula, String telefono, int edad, String sexo, String direccion, Date fecha_nacimiento, String mail, Double estatura, Double peso, String ocupacion, String imagen, Date fecha, int enfermero, String categoria) {
         this.codigo = codigo;
         this.paciente = paciente;
         this.cedula = cedula;
@@ -50,6 +50,8 @@ public class HistoriaClinica {
         this.enfermero = enfermero;
         this.categoria = categoria;
     }
+
+  
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
@@ -99,9 +101,7 @@ public class HistoriaClinica {
         this.ocupacion = ocupacion;
     }
 
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
-    }
+  
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
@@ -163,9 +163,7 @@ public class HistoriaClinica {
         return ocupacion;
     }
 
-    public byte[] getImagen() {
-        return imagen;
-    }
+  
 
     public Date getFecha() {
         return fecha;
@@ -177,6 +175,14 @@ public class HistoriaClinica {
 
     public String getCategoria() {
         return categoria;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
      
