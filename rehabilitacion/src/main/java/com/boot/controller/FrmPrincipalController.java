@@ -16,11 +16,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javax.imageio.ImageIO;
 
 /**
  * FXML Controller class
@@ -78,6 +82,9 @@ public class FrmPrincipalController implements Initializable {
     private JFXTextField jtxtNombre;
 
     @FXML
+    private JFXTextField jtxthClinica;
+
+    @FXML
     private JFXTextField jtxtCateg;
 
     @FXML
@@ -85,6 +92,9 @@ public class FrmPrincipalController implements Initializable {
 
     @FXML
     private JFXTextField jtxtEdad;
+
+    @FXML
+    private TextField txtSearch;
 
     private static FrmPrincipalController instance; // instancia del controlador 
 
@@ -99,6 +109,7 @@ public class FrmPrincipalController implements Initializable {
     }
 
     ObservableList<HistoriaClinica> pacientes;
+    ObservableList<HistoriaClinica> filtropacientes;
 
     @FXML
     private ObservableList<HistoriaClinica> cargarTabla() {
@@ -131,7 +142,7 @@ public class FrmPrincipalController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        filtropacientes = FXCollections.observableArrayList();
         setFirstname(FrmCargaController.getInstance().username());
         this.pacientes = cargarTabla();
 
@@ -163,8 +174,28 @@ public class FrmPrincipalController implements Initializable {
         jtxtNombre.setText(clmNombre.getCellData(index).toString());
         jtxtCedula.setText(clmCedula.getCellData(index).toString());
         jtxtEdad.setText(clmEdad.getCellData(index).toString());
-        
+        jtxthClinica.setText(clmHclinica.getCellData(index).toString());
+        byte[] byteArray = null; //need to initialize it
+      
+    }
 
+    @FXML
+    void filtrar(KeyEvent event) {
+        String filtroNombre = this.txtSearch.getText();
+        if (filtroNombre.isEmpty()) {
+            this.tableSignos.setItems(pacientes);
+        } else {
+
+            this.filtropacientes.clear();
+
+            for (HistoriaClinica paciente : pacientes) {
+                if (paciente.getPaciente().toLowerCase().contains(filtroNombre.toLowerCase())) {
+                    this.filtropacientes.add(paciente);
+
+                }
+            }
+            this.tableSignos.setItems(filtropacientes);
+        }
     }
 
 }
