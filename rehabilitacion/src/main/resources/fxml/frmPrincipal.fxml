@@ -21,6 +21,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
@@ -315,13 +316,8 @@
                   <Text layoutX="139.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Atención" />
                </children>
             </Pane>
-            <Pane layoutX="15.0" layoutY="77.0" prefHeight="119.0" prefWidth="1002.0" style="-fx-background-color: #FFFF; -fx-border-radius: 20; -fx-background-radius: 20;">
+            <Pane layoutX="15.0" layoutY="59.0" prefHeight="137.0" prefWidth="1002.0" style="-fx-background-color: #FFFF; -fx-border-radius: 20; -fx-background-radius: 20;">
                <children>
-                  <ImageView fx:id="imgPerfil" fitHeight="107.0" fitWidth="110.0" layoutX="62.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/picture.png" />
-                     </image>
-                  </ImageView>
                   <Text layoutX="455.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos del Paciente" />
                   <JFXTextField fx:id="jtxtNombre" alignment="CENTER" editable="false" layoutX="328.0" layoutY="28.0" unFocusColor="#6f6e6e" />
                   <JFXTextField fx:id="jtxthClinica" alignment="CENTER" editable="false" layoutX="365.0" layoutY="73.0" prefHeight="25.0" prefWidth="37.0" unFocusColor="#6f6e6e" />
@@ -332,6 +328,7 @@
                   <Label layoutX="522.0" layoutY="82.0" style="-fx-text-fill: #476d8a;" text="Edad :" />
                   <JFXTextField fx:id="jtxtCedula" alignment="CENTER" editable="false" layoutX="579.0" layoutY="29.0" unFocusColor="#6f6e6e" />
                   <JFXTextField fx:id="jtxtEdad" alignment="CENTER" editable="false" layoutX="581.0" layoutY="73.0" prefHeight="25.0" prefWidth="29.0" unFocusColor="#6f6e6e" />
+                  <Circle fx:id="perfil2" fill="#1f93ff00" layoutX="97.0" layoutY="70.0" radius="62.0" stroke="#396372" strokeType="INSIDE" />
                </children>
             </Pane>
             <Text layoutX="402.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOMA DE SIGNOS VITALES">
