@@ -21,7 +21,7 @@ public class App extends Application {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/frmCarga.fxml"));
             Scene scene = new Scene(root);
-            stage.initStyle(StageStyle.DECORATED);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(scene);
            
             stage.show();
