@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -26,9 +27,9 @@
 <?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane fx:id="principal" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1184.0" stylesheets="@../styles/frmprincipal.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.boot.controller.FrmPrincipalController">
+<BorderPane fx:id="principal" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1203.0" stylesheets="@../styles/frmprincipal.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.boot.controller.FrmPrincipalController">
    <left>
-      <VBox maxWidth="-Infinity" prefWidth="161.0" style="-fx-background-color: #ffff;" BorderPane.alignment="CENTER">
+      <VBox maxWidth="-Infinity" prefWidth="177.0" style="-fx-background-color: #ffff;" BorderPane.alignment="CENTER">
          <children>
             <HBox fx:id="advancevboc1" alignment="CENTER_LEFT" styleClass="hover_border" stylesheets="@../styles/frmprincipal.css">
                <padding>
@@ -45,7 +46,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                      <font>
-                        <Font size="13.0" />
+                        <Font name="Liberation Serif Bold" size="15.0" />
                      </font>
                   </Text>
                </children>
@@ -70,6 +71,9 @@
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Liberation Serif" size="15.0" />
+                     </font>
                   </Text>
                </children>
                <VBox.margin>
@@ -93,6 +97,9 @@
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Liberation Serif" size="15.0" />
+                     </font>
                   </Text>
                </children>
                <VBox.margin>
@@ -116,6 +123,9 @@
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Liberation Serif" size="15.0" />
+                     </font>
                   </Text>
                </children>
                <VBox.margin>
@@ -172,7 +182,10 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </FontIcon>
-                  <Text fill="#476d8a" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Aqua; -fx-font-weight: bold;" text="FISIO-SPA" underline="true" />
+                  <Text fill="#476d8a" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Aqua; -fx-font-weight: bold;" text="FISIO-SPA" underline="true">
+                     <font>
+                        <Font name="Liberation Serif" size="16.0" />
+                     </font></Text>
                </children>
                <HBox.margin>
                   <Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />
@@ -190,8 +203,11 @@
                   </ImageView>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido :">
                      <HBox.margin>
-                        <Insets top="16.0" />
+                        <Insets top="18.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Liberation Serif" size="16.0" />
+                     </font>
                   </Text>
                   <MenuButton fx:id="usrname" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" popupSide="TOP" style="-fx-border-color: transparent; -fx-background-color: transparent;" text="UserName" textOverrun="CENTER_ELLIPSIS">
                     <items>
@@ -202,6 +218,9 @@
                      <HBox.margin>
                         <Insets left="9.0" right="17.0" top="12.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Liberation Serif" size="14.0" />
+                     </font>
                   </MenuButton>
                </children>
             </HBox>
@@ -216,7 +235,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Pacientes">
             <items>
-              <MenuItem mnemonicParsing="false" text="Nuevo Paciente">
+              <MenuItem fx:id="btnewUser" mnemonicParsing="false" onAction="#newUser" text="Nuevo Paciente">
                      <graphic>
                         <FontIcon iconLiteral="mdi-human-male" iconSize="22" />
                      </graphic>
@@ -265,73 +284,133 @@
       </MenuBar>
    </top>
    <center>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <Pane prefHeight="200.0" prefWidth="1002.0" BorderPane.alignment="CENTER">
          <children>
-            <Pane layoutX="15.0" layoutY="218.0" prefHeight="330.0" prefWidth="1002.0" style="-fx-background-color: #FFFF; -fx-background-radius: 20;">
+            <Pane layoutX="15.0" layoutY="218.0" prefHeight="355.0" prefWidth="1002.0" style="-fx-background-color: #FFFF; -fx-background-radius: 20;">
                <children>
-                  <TextField fx:id="txtSearch" layoutX="387.0" layoutY="27.0" onKeyReleased="#filtrar" prefHeight="25.0" prefWidth="286.0" />
-                  <GridPane layoutX="7.0" layoutY="14.0" prefHeight="301.0" prefWidth="279.0">
+                  <TextField fx:id="txtSearch" layoutX="396.0" layoutY="27.0" onKeyReleased="#filtrar" prefHeight="25.0" prefWidth="286.0" />
+                  <GridPane layoutX="7.0" layoutY="14.0" prefHeight="197.0" prefWidth="286.0">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="133.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="124.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.0" minWidth="10.0" prefWidth="22.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.0" minWidth="10.0" prefWidth="170.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="44.66668701171875" />
+                      <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="80.66665649414062" minWidth="10.0" prefWidth="72.33331298828125" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="68.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="45.666656494140625" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="68.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label style="-fx-text-fill: #476d8a; -fx-font-weight: bold;" text="Hora :" />
-                        <Label style="-fx-text-fill: #476d8a; -fx-font-weight: bold;" text="Temperatura :" GridPane.rowIndex="1" />
-                        <Label style="-fx-text-fill: #476d8a; -fx-font-weight: bold;" text="Frecuencia Cardiaca :" GridPane.rowIndex="2" />
-                        <Label style="-fx-text-fill: #476d8a; -fx-font-weight: bold;" text="Saturación de Oxígeno :" GridPane.rowIndex="3" />
-                        <Label style="-fx-text-fill: #476d8a; -fx-font-weight: bold;" text="Presión Arterial :" GridPane.rowIndex="4" />
-                        <Label style="-fx-text-fill: #476d8a; -fx-font-weight: bold;" text="Sintomas :" GridPane.rowIndex="5" />
-                        <Label style="-fx-text-fill: #476d8a; -fx-font-weight: bold;" text="Antecedentes :" GridPane.rowIndex="7" />
-                        <Label style="-fx-text-fill: #476d8a; -fx-font-weight: bold;" text="Alergias" GridPane.rowIndex="6" />
+                        <Label style="-fx-text-fill: #476d8a; -fx-font-weight: bold;" text="Hora :" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font name="Liberation Serif" size="12.0" />
+                           </font></Label>
+                        <Label style="-fx-text-fill: #476d8a; -fx-font-weight: bold;" text="Temperatura :" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font name="Liberation Serif" size="12.0" />
+                           </font></Label>
+                        <Label style="-fx-text-fill: #476d8a; -fx-font-weight: bold;" text="Frecuencia Cardiaca :" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font name="Liberation Serif" size="12.0" />
+                           </font></Label>
+                        <Label style="-fx-text-fill: #476d8a; -fx-font-weight: bold;" text="Saturación de Oxígeno :" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font name="Liberation Serif" size="12.0" />
+                           </font></Label>
+                        <Label style="-fx-text-fill: #476d8a; -fx-font-weight: bold;" text="Presión Arterial :" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font name="Liberation Serif" size="12.0" />
+                           </font></Label>
+                        <JFXTextField fx:id="txtTemp" alignment="CENTER" prefWidth="22.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <JFXTextField fx:id="txtFrecu" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <JFXTextField fx:id="jtxtSatOx" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <JFXTextField fx:id="txtPresArt" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="jtxthora" prefHeight="17.0" prefWidth="48.0" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font name="Liberation Serif" size="13.0" />
+                           </font></Label>
+                        <Label text="0.0" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                        <Label text="0.0" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                        <Label text="0.0" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
+                        <Label text="0.0" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
+                        <Label style="-fx-text-fill: #476d8a; -fx-font-weight: bold;" text="Alergias" GridPane.rowIndex="5" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font name="Liberation Serif" size="12.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="txtAlerg" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
-                  <Label layoutX="309.0" layoutY="31.0" text="Buscar por :" />
-                  <FontIcon fill="#476d8a" iconLiteral="mdi-magnify" iconSize="20" layoutX="645.0" layoutY="48.0" />
-                  <Separator layoutX="286.0" layoutY="14.0" orientation="VERTICAL" prefHeight="300.0" />
-                  <TableView fx:id="tableSignos" layoutX="294.0" layoutY="73.0" onMouseClicked="#selecPaciente" prefHeight="251.0" prefWidth="700.0" styleClass="column-header-background" tableMenuButtonVisible="true">
+                  <Label layoutX="309.0" layoutY="31.0" text="Buscar por :">
+                     <font>
+                        <Font name="Liberation Serif" size="13.0" />
+                     </font></Label>
+                  <FontIcon fill="#476d8a" iconLiteral="mdi-magnify" iconSize="20" layoutX="659.0" layoutY="48.0" />
+                  <Separator layoutX="293.0" orientation="VERTICAL" prefHeight="350.0" />
+                  <TableView fx:id="tableSignos" layoutX="305.0" layoutY="73.0" onMouseClicked="#selecPaciente" prefHeight="251.0" prefWidth="689.0" styleClass="column-header-background" tableMenuButtonVisible="true">
                     <columns>
-                      <TableColumn fx:id="clmCategoria" prefWidth="62.0" text="Categoria" />
-                        <TableColumn fx:id="clmHclinica" prefWidth="56.0" text="H Clinica" />
-                      <TableColumn fx:id="clmNombre" prefWidth="122.0" text="Nombre" />
-                        <TableColumn fx:id="clmCedula" prefWidth="164.66668701171875" text="Cedula" />
-                        <TableColumn fx:id="clmEdad" prefWidth="79.33331298828125" text="Edad" />
+                      <TableColumn fx:id="clmCategoria" prefWidth="84.0" text="Categoria" />
+                        <TableColumn fx:id="clmHclinica" editable="false" prefWidth="73.3333740234375" text="H Clinica" />
+                      <TableColumn fx:id="clmNombre" prefWidth="335.0" text="Nombre" />
+                        <TableColumn fx:id="clmCedula" prefWidth="129.0" text="Cedula" />
+                        <TableColumn fx:id="clmEdad" prefWidth="56.0" text="Edad" />
                         <TableColumn fx:id="clmFoto" prefWidth="75.0" text="Foto" />
                     </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
                   </TableView>
-                  <Text layoutX="139.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Atención" />
+                  <Text layoutX="110.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Atención">
+                     <font>
+                        <Font name="Liberation Serif" size="14.0" />
+                     </font></Text>
+                  <Label layoutX="9.0" layoutY="316.0" style="-fx-text-fill: #476d8a; -fx-font-weight: bold;" text="Antecedentes :">
+                     <font>
+                        <Font name="Liberation Serif" size="12.0" />
+                     </font>
+                  </Label>
+                  <JFXTextArea fx:id="jtxaAntec" layoutX="94.0" layoutY="302.0" prefHeight="54.0" prefWidth="190.0">
+                     <font>
+                        <Font name="Liberation Serif" size="12.0" />
+                     </font></JFXTextArea>
+                  <Label layoutX="9.0" layoutY="254.0" style="-fx-text-fill: #476d8a; -fx-font-weight: bold;" text="Sintomas :">
+                     <font>
+                        <Font name="Liberation Serif" size="12.0" />
+                     </font>
+                  </Label>
+                  <JFXTextArea fx:id="jtxaSintoma" labelFloat="true" layoutX="93.0" layoutY="228.0" prefHeight="66.0" prefWidth="194.0">
+                     <font>
+                        <Font name="Liberation Serif" size="12.0" />
+                     </font></JFXTextArea>
                </children>
             </Pane>
             <Pane layoutX="15.0" layoutY="59.0" prefHeight="137.0" prefWidth="1002.0" style="-fx-background-color: #FFFF; -fx-border-radius: 20; -fx-background-radius: 20;">
                <children>
-                  <Text layoutX="455.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datos del Paciente" />
-                  <JFXTextField fx:id="jtxtNombre" alignment="CENTER" editable="false" layoutX="328.0" layoutY="28.0" unFocusColor="#6f6e6e" />
+                  <JFXTextField fx:id="jtxtNombre" editable="false" layoutX="328.0" layoutY="28.0" prefHeight="26.0" prefWidth="218.0" unFocusColor="#6f6e6e" />
                   <JFXTextField fx:id="jtxthClinica" alignment="CENTER" editable="false" layoutX="365.0" layoutY="73.0" prefHeight="25.0" prefWidth="37.0" unFocusColor="#6f6e6e" />
                   <JFXTextField fx:id="jtxtCateg" alignment="CENTER" editable="false" layoutX="328.0" layoutY="73.0" prefHeight="25.0" prefWidth="24.0" unFocusColor="#6f6e6e" />
-                  <Label layoutX="259.0" layoutY="39.0" style="-fx-text-fill: #476d8a;" text="Nombre :" />
-                  <Label layoutX="259.0" layoutY="82.0" style="-fx-text-fill: #476d8a;" text="H Clinica :" />
-                  <Label layoutX="522.0" layoutY="39.0" style="-fx-text-fill: #476d8a;" text="Cédula :" />
-                  <Label layoutX="522.0" layoutY="82.0" style="-fx-text-fill: #476d8a;" text="Edad :" />
-                  <JFXTextField fx:id="jtxtCedula" alignment="CENTER" editable="false" layoutX="579.0" layoutY="29.0" unFocusColor="#6f6e6e" />
+                  <Label layoutX="259.0" layoutY="39.0" style="-fx-text-fill: #476d8a;" text="Nombre :">
+                     <font>
+                        <Font name="Liberation Serif" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="259.0" layoutY="82.0" style="-fx-text-fill: #476d8a;" text="H Clinica :">
+                     <font>
+                        <Font name="Liberation Serif" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="589.0" layoutY="39.0" style="-fx-text-fill: #476d8a;" text="Cédula :">
+                     <font>
+                        <Font name="Liberation Serif" size="13.0" />
+                     </font></Label>
+                  <Label layoutX="522.0" layoutY="82.0" style="-fx-text-fill: #476d8a;" text="Edad :">
+                     <font>
+                        <Font name="Liberation Serif" size="13.0" />
+                     </font></Label>
+                  <JFXTextField fx:id="jtxtCedula" alignment="CENTER" editable="false" layoutX="646.0" layoutY="29.0" unFocusColor="#6f6e6e" />
                   <JFXTextField fx:id="jtxtEdad" alignment="CENTER" editable="false" layoutX="581.0" layoutY="73.0" prefHeight="25.0" prefWidth="29.0" unFocusColor="#6f6e6e" />
                   <Circle fx:id="perfil2" fill="#1f93ff00" layoutX="97.0" layoutY="70.0" radius="62.0" stroke="#396372" strokeType="INSIDE" />
                </children>
             </Pane>
-            <Text layoutX="402.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOMA DE SIGNOS VITALES">
+            <Text fontSmoothingType="LCD" layoutX="405.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOMA DE SIGNOS VITALES">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Text>

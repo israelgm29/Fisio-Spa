@@ -15,16 +15,28 @@
    <children>
       <Pane layoutX="251.0" layoutY="4.0" prefHeight="394.0" prefWidth="299.0" style="-fx-background-radius: 20;">
          <children>
-            <Label layoutX="103.0" layoutY="14.0" text="FISIOSPA" textFill="#3b4859">
+            <Label layoutX="103.0" layoutY="14.0" text="FISIO-SPA" textFill="#3b4859">
                <font>
-                  <Font name="Amiri Bold" size="23.0" />
+                  <Font name="Handy Quomte Regular" size="23.0" />
                </font>
             </Label>
-            <Label layoutX="80.0" layoutY="70.0" text="Inicia Sesión con tu Cuenta" textFill="#3b4859" />
-            <TextField fx:id="txtuser" alignment="CENTER" layoutX="34.0" layoutY="100.0" prefHeight="25.0" prefWidth="238.0" promptText="Usuario" style="-fx-background-radius: 10;" styleClass="text-input" stylesheets="@../styles/frmcarga.css" />
-            <PasswordField fx:id="txtpassword" alignment="CENTER" layoutX="34.0" layoutY="143.0" prefHeight="25.0" prefWidth="238.0" promptText="Password" style="-fx-background-radius: 10;" />
-            <Label layoutX="31.0" layoutY="180.0" text="¿Olvidaste tu " />
-            <JFXButton layoutX="93.0" layoutY="176.0" prefHeight="25.0" prefWidth="85.0" ripplerFill="#ebebeb" text="contraseña?">
+            <Label layoutX="78.0" layoutY="77.0" text="Inicia Sesión con tu Cuenta" textFill="#3b4859">
+               <font>
+                  <Font size="12.0" />
+               </font></Label>
+            <TextField fx:id="txtuser" alignment="CENTER" layoutX="34.0" layoutY="100.0" prefHeight="25.0" prefWidth="238.0" promptText="Usuario" style="-fx-background-radius: 10;" styleClass="text-input" stylesheets="@../styles/frmcarga.css">
+               <font>
+                  <Font size="12.0" />
+               </font></TextField>
+            <PasswordField fx:id="txtpassword" alignment="CENTER" layoutX="34.0" layoutY="143.0" prefHeight="25.0" prefWidth="238.0" promptText="Password" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="12.0" />
+               </font></PasswordField>
+            <Label layoutX="31.0" layoutY="180.0" text="¿Olvidaste tu ">
+               <font>
+                  <Font size="12.0" />
+               </font></Label>
+            <JFXButton layoutX="114.0" layoutY="176.0" prefHeight="25.0" prefWidth="110.0" ripplerFill="#ebebeb" text="contraseña?">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -44,11 +56,14 @@
             </JFXButton>
             <Separator layoutX="8.0" layoutY="296.0" prefHeight="12.0" prefWidth="110.0" />
             <Separator layoutX="178.0" layoutY="296.0" prefHeight="12.0" prefWidth="110.0" />
-            <Label layoutX="40.0" layoutY="331.0" text="No tienes cuenta?" />
-            <JFXButton fx:id="btnRegistrer" layoutX="144.0" layoutY="326.0" onAction="#SingUp" text="Registrarse" textFill="#3b4859">
+            <Label layoutX="40.0" layoutY="331.0" text="No tienes cuenta?">
+               <font>
+                  <Font size="12.0" />
+               </font></Label>
+            <JFXButton fx:id="btnRegistrer" layoutX="155.0" layoutY="326.0" onAction="#SingUp" text="Registrarse" textFill="#3b4859">
            
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="System Bold" size="12.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />

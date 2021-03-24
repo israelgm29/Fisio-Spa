@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="com.boot.controller.FrmnuevoPacienteController">
+    <stylesheets>
+        <URL value="@/styles/frmnuevopaciente.css" />
+    </stylesheets>
+   <children>
+      <Circle layoutX="136.0" layoutY="181.0" radius="69.0" stroke="TRANSPARENT" strokeType="INSIDE">
+         <fill>
+            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.4384746551513672" green="0.6205531358718872" blue="0.8026315569877625" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.4896296296296296">
+                     <color>
+                        <Color red="0.4945175349712372" green="0.5942251682281494" blue="0.8684210777282715" opacity="0.7300000190734863" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.4311999976634979" green="0.6074396371841431" blue="0.7699999809265137" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Circle>
+      <JFXButton contentDisplay="TOP" layoutX="24.0" layoutY="269.0" text="Tomar Foto">
+         <graphic>
+            <FontIcon iconLiteral="mdi-camera" iconSize="20" />
+         </graphic>
+         <font>
+            <Font size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton contentDisplay="TOP" layoutX="154.0" layoutY="269.0" text="Cargar Foto">
+         <graphic>
+            <FontIcon iconLiteral="mdi-cloud-upload" iconSize="20" />
+         </graphic>
+         <font>
+            <Font size="12.0" />
+         </font>
+      </JFXButton>
+      <Text fontSmoothingType="LCD" layoutX="389.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informacion Personal">
+         <font>
+            <Font name="Liberation Serif" size="16.0" />
+         </font>
+      </Text>
+      <Label alignment="CENTER_RIGHT" layoutX="491.0" layoutY="86.0" text="Cedula">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="500.0" layoutY="116.0" text="Edad">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="480.0" layoutY="152.0" text="Dirección">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="494.0" layoutY="188.0" text="Género">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font>
+      </Label>
+      <JFXTextField layoutX="564.0" layoutY="40.0" prefHeight="26.0" prefWidth="182.0">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField layoutX="564.0" layoutY="68.0" prefHeight="26.0" prefWidth="182.0">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </JFXTextField>
+      <Spinner editable="true" layoutX="564.0" layoutY="110.0" prefHeight="26.0" prefWidth="182.0" />
+      <JFXTextField layoutX="564.0" layoutY="138.0" prefHeight="26.0" prefWidth="182.0">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="434.0" layoutY="58.0" text="Nombre y Apellido">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font>
+      </Label>
+      <ComboBox layoutX="564.0" layoutY="181.0" prefHeight="26.0" prefWidth="182.0" />
+      <Text fontSmoothingType="LCD" layoutX="367.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informacion del Paciente">
+         <font>
+            <Font name="Liberation Serif" size="16.0" />
+         </font>
+      </Text>
+      <Label layoutX="495.0" layoutY="224.0" text="Correo">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="478.0" layoutY="255.0" text="Ocupación">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font>
+      </Label>
+      <JFXTextField layoutX="564.0" layoutY="209.0" prefHeight="26.0" prefWidth="182.0" />
+      <JFXTextField layoutX="564.0" layoutY="244.0" prefHeight="26.0" prefWidth="182.0" />
+      <Label layoutX="473.0" layoutY="342.0" text="Estatura">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="488.0" layoutY="375.0" text="Peso">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="411.0" layoutY="408.0" text="Fecha de Nacimiento">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font>
+      </Label>
+      <JFXTextField layoutX="564.0" layoutY="329.0" prefHeight="26.0" prefWidth="182.0" />
+      <JFXTextField layoutX="564.0" layoutY="360.0" prefHeight="26.0" prefWidth="182.0" />
+      <Text layoutX="121.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Foto ">
+         <font>
+            <Font name="Liberation Serif" size="14.0" />
+         </font>
+      </Text>
+      <DatePicker layoutX="564.0" layoutY="402.0" prefHeight="26.0" prefWidth="182.0" />
+   </children>
+</AnchorPane>

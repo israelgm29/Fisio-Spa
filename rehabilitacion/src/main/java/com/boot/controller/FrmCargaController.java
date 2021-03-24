@@ -1,7 +1,6 @@
 package com.boot.controller;
 
 import com.boot.dataaccess.Conexion;
-import com.boot.models.Administrador;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -16,7 +15,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -24,12 +22,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.Window;
 import javax.swing.JOptionPane;
 
 /**
@@ -167,6 +161,10 @@ public class FrmCargaController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(FrmCargaController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void login(KeyEvent event) {
     }
 
 }

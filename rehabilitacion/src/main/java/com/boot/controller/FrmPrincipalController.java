@@ -2,37 +2,39 @@ package com.boot.controller;
 
 import com.boot.dataaccess.Conexion;
 import com.boot.models.HistoriaClinica;
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Arrays;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -84,9 +86,6 @@ public class FrmPrincipalController implements Initializable {
     private TableColumn<HistoriaClinica, String> clmFoto;
 
     @FXML
-    private ImageView imgPerfil;
-
-    @FXML
     private JFXTextField jtxtNombre;
 
     @FXML
@@ -104,11 +103,31 @@ public class FrmPrincipalController implements Initializable {
     @FXML
     private TextField txtSearch;
 
+    @FXML
+    private JFXTextField txtTemp;
+    @FXML
+    private JFXTextField txtFrecu;
+    @FXML
+    private JFXTextField txtPresArt;
+    @FXML
+    private JFXTextField txtAlerg;
+
+    @FXML
+    private Circle perfil2;
+    @FXML
+    private Label jtxthora;
+    @FXML
+    private JFXTextArea jtxaAntec;
+    @FXML
+    private JFXTextArea jtxaSintoma;
+
     private static FrmPrincipalController instance; // instancia del controlador 
 
     int index = -1;
     @FXML
-    private Circle perfil2;
+    private JFXTextField jtxtSatOx;
+    @FXML
+    private MenuItem btnewUser;
 
     public FrmPrincipalController() {
         instance = this;
@@ -154,6 +173,7 @@ public class FrmPrincipalController implements Initializable {
         filtropacientes = FXCollections.observableArrayList();
         setFirstname(FrmCargaController.getInstance().username());
         this.pacientes = cargarTabla();
+        getHora(); // obterner hora actual
 
         // cargar columnas
         this.clmCategoria.setCellValueFactory(new PropertyValueFactory<HistoriaClinica, String>("categoria"));
@@ -174,7 +194,7 @@ public class FrmPrincipalController implements Initializable {
 
     @FXML
     private void selecPaciente(MouseEvent event) {
-    
+
         index = tableSignos.getSelectionModel().getSelectedIndex();
         if (index <= -1) {
             return;
@@ -185,11 +205,8 @@ public class FrmPrincipalController implements Initializable {
         jtxtEdad.setText(clmEdad.getCellData(index).toString());
         jtxthClinica.setText(clmHclinica.getCellData(index).toString());
         Image perfil = new Image(clmFoto.getCellData(index));
-        imgPerfil.setImage(perfil);
         perfil2.setFill(new ImagePattern(perfil));
-        
-     
- 
+        getHora();
 
     }
 
@@ -212,4 +229,31 @@ public class FrmPrincipalController implements Initializable {
         }
     }
 
+    void getHora() {
+        LocalDateTime locaDate = LocalDateTime.now();
+        String hours = Integer.toString(locaDate.getHour());
+        String minutes = Integer.toString(locaDate.getMinute());
+        String seconds = Integer.toString(locaDate.getSecond());
+        jtxthora.setText(hours + ":" + minutes + ":" + seconds);
+
+    }
+
+    @FXML
+    private void newUser(ActionEvent event) {
+  
+        try {
+            Stage newUser = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/frmnuevoPaciente.fxml"));
+
+            Scene scene = new Scene(root);
+            newUser.setScene(scene);
+            newUser.show();
+        } catch (IOException ex) {
+            Logger.getLogger(FrmPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+       
+    }
+    
+    
 }
