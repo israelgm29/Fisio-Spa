@@ -19,7 +19,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/frmCarga.fxml"));
+//            Parent root = FXMLLoader.load(getClass().getResource("/fxml/frmCarga.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/frmnuevoPaciente.fxml"));
             Scene scene = new Scene(root);
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(scene);
