@@ -16,12 +16,12 @@
 <?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="com.boot.controller.FrmnuevoPacienteController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.boot.controller.FrmnuevoPacienteController">
     <stylesheets>
         <URL value="@/styles/frmnuevopaciente.css" />
     </stylesheets>
    <children>
-      <Circle layoutX="136.0" layoutY="181.0" radius="69.0" stroke="TRANSPARENT" strokeType="INSIDE">
+      <Circle fx:id="imgPerfil" layoutX="136.0" layoutY="181.0" radius="69.0" stroke="TRANSPARENT" strokeType="INSIDE">
          <fill>
             <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                <stops>
@@ -44,20 +44,23 @@
             </RadialGradient>
          </fill>
       </Circle>
-      <JFXButton contentDisplay="TOP" layoutX="24.0" layoutY="269.0" text="Tomar Foto">
+      <JFXButton fx:id="btnTomar" contentDisplay="TOP" layoutX="24.0" layoutY="269.0" onAction="#TakeFoto" text="Tomar Foto">
          <graphic>
-            <FontIcon iconLiteral="mdi-camera" iconSize="20" />
+            <FontIcon fx:id="btnTomarFoto" iconLiteral="mdi-camera" iconSize="20" />
          </graphic>
          <font>
-            <Font size="12.0" />
+            <Font name="Liberation Serif" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton contentDisplay="TOP" layoutX="154.0" layoutY="269.0" text="Cargar Foto">
+      <JFXButton fx:id="btnCargar" contentDisplay="TOP" layoutX="154.0" layoutY="269.0" onAction="#ChargeFoto" text="Cargar Foto">
          <graphic>
-            <FontIcon iconLiteral="mdi-cloud-upload" iconSize="20" />
+            <FontIcon iconLiteral="mdi-cloud-upload" iconSize="20">
+               <font>
+                  <Font name="Liberation Serif" size="12.0" />
+               </font></FontIcon>
          </graphic>
          <font>
-            <Font size="12.0" />
+            <Font name="Liberation Serif" size="12.0" />
          </font>
       </JFXButton>
       <Text fontSmoothingType="LCD" layoutX="389.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informacion Personal">
@@ -85,20 +88,20 @@
             <Font name="Liberation Serif" size="12.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="564.0" layoutY="40.0" prefHeight="26.0" prefWidth="182.0">
+      <JFXTextField fx:id="jtxtNombre" layoutX="564.0" layoutY="40.0" prefHeight="26.0" prefWidth="182.0">
          <font>
-            <Font size="12.0" />
+            <Font name="Liberation Serif" size="12.0" />
          </font>
       </JFXTextField>
-      <JFXTextField layoutX="564.0" layoutY="68.0" prefHeight="26.0" prefWidth="182.0">
+      <JFXTextField fx:id="JtxtCedula" layoutX="564.0" layoutY="68.0" prefHeight="26.0" prefWidth="62.0">
          <font>
-            <Font size="12.0" />
+            <Font name="Liberation Serif" size="12.0" />
          </font>
       </JFXTextField>
-      <Spinner editable="true" layoutX="564.0" layoutY="110.0" prefHeight="26.0" prefWidth="182.0" />
-      <JFXTextField layoutX="564.0" layoutY="138.0" prefHeight="26.0" prefWidth="182.0">
+      <Spinner fx:id="jtxtEdad" editable="true" layoutX="564.0" layoutY="110.0" prefHeight="26.0" prefWidth="182.0" />
+      <JFXTextField fx:id="jtxtDireccion" layoutX="564.0" layoutY="138.0" prefHeight="26.0" prefWidth="182.0">
          <font>
-            <Font size="12.0" />
+            <Font name="Liberation Serif Bold" size="12.0" />
          </font>
       </JFXTextField>
       <Label layoutX="434.0" layoutY="58.0" text="Nombre y Apellido">
@@ -106,7 +109,7 @@
             <Font name="Liberation Serif" size="12.0" />
          </font>
       </Label>
-      <ComboBox layoutX="564.0" layoutY="181.0" prefHeight="26.0" prefWidth="182.0" />
+      <ComboBox fx:id="cmbGenero" layoutX="564.0" layoutY="181.0" prefHeight="26.0" prefWidth="182.0" />
       <Text fontSmoothingType="LCD" layoutX="367.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informacion del Paciente">
          <font>
             <Font name="Liberation Serif" size="16.0" />
@@ -122,8 +125,14 @@
             <Font name="Liberation Serif" size="12.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="564.0" layoutY="209.0" prefHeight="26.0" prefWidth="182.0" />
-      <JFXTextField layoutX="564.0" layoutY="244.0" prefHeight="26.0" prefWidth="182.0" />
+      <JFXTextField fx:id="jtxtCorreo" layoutX="564.0" layoutY="209.0" prefHeight="26.0" prefWidth="182.0">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="jtxtOcupacion" layoutX="564.0" layoutY="244.0" prefHeight="26.0" prefWidth="182.0">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font></JFXTextField>
       <Label layoutX="473.0" layoutY="342.0" text="Estatura">
          <font>
             <Font name="Liberation Serif" size="12.0" />
@@ -139,13 +148,47 @@
             <Font name="Liberation Serif" size="12.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="564.0" layoutY="329.0" prefHeight="26.0" prefWidth="182.0" />
-      <JFXTextField layoutX="564.0" layoutY="360.0" prefHeight="26.0" prefWidth="182.0" />
-      <Text layoutX="121.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Foto ">
+      <JFXTextField fx:id="jtxtEstatura" layoutX="564.0" layoutY="329.0" prefHeight="26.0" prefWidth="62.0" promptText="Ejemp:1.74">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="JtxtPeso" layoutX="564.0" layoutY="360.0" prefHeight="26.0" prefWidth="62.0" promptText="Ejemp: 60">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font></JFXTextField>
+      <Text fontSmoothingType="LCD" layoutX="121.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Foto ">
          <font>
             <Font name="Liberation Serif" size="14.0" />
          </font>
       </Text>
-      <DatePicker layoutX="564.0" layoutY="402.0" prefHeight="26.0" prefWidth="182.0" />
+      <DatePicker fx:id="dtpickFechanac" layoutX="564.0" layoutY="402.0" prefHeight="26.0" prefWidth="182.0" />
+      <JFXTextField fx:id="jtxtTelefono" layoutX="683.0" layoutY="68.0" prefHeight="26.0" prefWidth="62.0">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="631.0" layoutY="86.0" text="Teléfono">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="637.0" layoutY="342.0" text="metros">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="641.0" layoutY="374.0" text="Kg">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnGuardar" alignment="CENTER" layoutX="533.0" layoutY="451.0" onAction="#Guardad" prefHeight="34.0" prefWidth="94.0" style="-fx-background-color: #2d467d; -fx-background-radius: 20;" text="Guardar" textFill="WHITE">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font>
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="mdi-content-save" iconSize="20" />
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>
