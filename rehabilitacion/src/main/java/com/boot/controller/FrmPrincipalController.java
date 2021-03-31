@@ -1,12 +1,11 @@
 package com.boot.controller;
 
-import com.boot.dataaccess.Conexion;
 import com.boot.models.HistoriaClinica;
+import com.boot.models.OperacionHistoriaC;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
@@ -45,64 +44,44 @@ public class FrmPrincipalController implements Initializable {
 
     @FXML
     private HBox advancevboc1;
-
     @FXML
     private HBox advancevboc2;
-
     @FXML
     private HBox advancevboc3;
-
     @FXML
     private HBox advancevboc4;
-
     @FXML
     private HBox advancevboc41;
-
     @FXML
     private MenuButton usrname;
-
     @FXML
     private BorderPane principal;
-
     @FXML
     private TableView<HistoriaClinica> tableSignos;
-
     @FXML
     private TableColumn<HistoriaClinica, String> clmCategoria;
-
     @FXML
     private TableColumn<HistoriaClinica, Integer> clmHclinica;
-
     @FXML
     private TableColumn<HistoriaClinica, String> clmNombre;
-
     @FXML
     private TableColumn<HistoriaClinica, String> clmCedula;
-
     @FXML
     private TableColumn<HistoriaClinica, Integer> clmEdad;
-
     @FXML
     private TableColumn<HistoriaClinica, String> clmFoto;
-
     @FXML
     private JFXTextField jtxtNombre;
-
     @FXML
     private JFXTextField jtxthClinica;
-
     @FXML
     private JFXTextField jtxtCateg;
-
     @FXML
     private JFXTextField jtxtCedula;
-
     @FXML
     private JFXTextField jtxtEdad;
-
     @FXML
     private TextField txtSearch;
-
     @FXML
     private JFXTextField txtTemp;
     @FXML
@@ -111,7 +90,6 @@ public class FrmPrincipalController implements Initializable {
     private JFXTextField txtPresArt;
     @FXML
     private JFXTextField txtAlerg;
-
     @FXML
     private Circle perfil2;
     @FXML
@@ -142,13 +120,12 @@ public class FrmPrincipalController implements Initializable {
 
     private ObservableList<HistoriaClinica> cargarTabla() {
         ObservableList<HistoriaClinica> hclinicas = FXCollections.observableArrayList();
-        Conexion con = new Conexion();
-        con.conectar();
-        PreparedStatement pst = null;
-        String sql = ("SELECT codigo, paciente, cedula, edad, foto, categoria FROM \"historia clinica\" ORDER BY codigo ASC");
+        OperacionHistoriaC ophc = new OperacionHistoriaC();
+        ophc.Conectar();
+        ResultSet rst = ophc.Mostrarpacientes();
+        
         try {
-            ResultSet rst = con.ejecutarQuery(sql);
-
+            
             while (rst.next()) {
                 HistoriaClinica HClinica = new HistoriaClinica();
 ////                //Transformar foto
