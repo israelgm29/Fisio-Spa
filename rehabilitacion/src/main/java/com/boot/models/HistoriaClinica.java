@@ -6,6 +6,7 @@
 package com.boot.models;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -19,20 +20,19 @@ public class HistoriaClinica {
     private int edad;
     private String sexo;
     private String direccion;
-    private Date fecha_nacimiento;
+    private LocalDate fecha_nacimiento;
     private String mail;
     private Double estatura;
     private Double peso;
     private String ocupacion;
     private String imagen;
-    private Date fecha;
     private int enfermero;
     private String categoria;
 
     public HistoriaClinica() {
     }
 
-    public HistoriaClinica(int codigo, String paciente, String cedula, String telefono, int edad, String sexo, String direccion, Date fecha_nacimiento, String mail, Double estatura, Double peso, String ocupacion, String imagen, Date fecha, int enfermero, String categoria) {
+    public HistoriaClinica(int codigo, String paciente, String cedula, String telefono, int edad, String sexo, String direccion, LocalDate fecha_nacimiento, String mail, Double estatura, Double peso, String ocupacion, String imagen, int enfermero, String categoria) {
         this.codigo = codigo;
         this.paciente = paciente;
         this.cedula = cedula;
@@ -46,10 +46,12 @@ public class HistoriaClinica {
         this.peso = peso;
         this.ocupacion = ocupacion;
         this.imagen = imagen;
-        this.fecha = fecha;
         this.enfermero = enfermero;
         this.categoria = categoria;
     }
+
+
+    
 
   
 
@@ -81,10 +83,6 @@ public class HistoriaClinica {
         this.direccion = direccion;
     }
 
-    public void setFecha_nacimiento(Date fecha_nacimiento) {
-        this.fecha_nacimiento = fecha_nacimiento;
-    }
-
     public void setMail(String mail) {
         this.mail = mail;
     }
@@ -102,11 +100,6 @@ public class HistoriaClinica {
     }
 
   
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
     public void setEnfermero(int enfermero) {
         this.enfermero = enfermero;
     }
@@ -143,10 +136,6 @@ public class HistoriaClinica {
         return direccion;
     }
 
-    public Date getFecha_nacimiento() {
-        return fecha_nacimiento;
-    }
-
     public String getMail() {
         return mail;
     }
@@ -163,12 +152,6 @@ public class HistoriaClinica {
         return ocupacion;
     }
 
-  
-
-    public Date getFecha() {
-        return fecha;
-    }
-
     public int getEnfermero() {
         return enfermero;
     }
@@ -183,6 +166,14 @@ public class HistoriaClinica {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public LocalDate getFecha_nacimiento() {
+        return fecha_nacimiento;
+    }
+
+    public void setFecha_nacimiento(LocalDate fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
     }
 
      
