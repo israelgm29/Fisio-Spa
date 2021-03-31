@@ -1,12 +1,15 @@
 package com.boot.controller;
 
 import com.boot.models.HistoriaClinica;
+import com.boot.models.OperacionHistoriaC;
 import com.github.sarxos.webcam.Webcam;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
@@ -17,8 +20,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.sql.Connection;
-import java.sql.Statement;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +29,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Spinner;
 import javafx.scene.image.Image;
@@ -35,6 +39,7 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import org.apache.commons.io.FilenameUtils;
 import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.javafx.Icon;
 
 /**
  * FXML Controller class
@@ -81,6 +86,10 @@ public class FrmnuevoPacienteController implements Initializable {
     public static Webcam webcam; // For taking pictures
     public static boolean isCapture = false; // For stop & resume thread of camera
     private String pathFoto = null;
+    @FXML
+    private MFXTextField jtxtCateg;
+    @FXML
+    private MFXTextField asd;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -88,6 +97,15 @@ public class FrmnuevoPacienteController implements Initializable {
         cmbGenero.getItems().add("Femenino");
         cmbGenero.getItems().add("LGBTI");
         cmbGenero.getItems().add("Otro");
+        RequiredFieldValidator validator = new RequiredFieldValidator();
+        validator.setMessage("campo obligatorio");
+        validator.setIcon(new FontIcon("mdi-account"));
+        jtxtNombre.getValidators().add(validator);
+        jtxtNombre.focusedProperty().addListener((o, oldVal, newVal) -> {
+            if (!newVal) {
+                jtxtNombre.validate();
+            }
+        });
 
         // TODO
     }
@@ -159,6 +177,31 @@ public class FrmnuevoPacienteController implements Initializable {
     private void Guardad(ActionEvent event) {
         System.out.println(pathFoto);
 
+        HistoriaClinica hc = new HistoriaClinica();
+        hc.setPaciente(jtxtNombre.getText());
+        hc.setCedula(JtxtCedula.getText());
+        hc.setTelefono(jtxtTelefono.getText());
+        hc.setSexo(cmbGenero.getSelectedValue());
+        hc.setDireccion(jtxtDireccion.getText());
+        hc.setMail(jtxtCorreo.getText());
+        hc.setOcupacion(jtxtOcupacion.getText());
+        hc.setImagen(pathFoto);
+        hc.setCategoria(jtxtCateg.getText());
+        hc.setEdad(jtxtEdad.getValue());
+        hc.setEstatura(Double.parseDouble(jtxtEstatura.getText()));
+        hc.setPeso(Double.parseDouble(JtxtPeso.getText()));
+        hc.setFecha_nacimiento(dtpickFechanac.getDate());
+
+        OperacionHistoriaC opc = new OperacionHistoriaC();
+        if (opc.InsertarPaciente(hc) > 0) {
+            Alert message = new Alert(Alert.AlertType.INFORMATION);
+            message.setTitle("FISIO-SPA");
+            message.setContentText("Paciente inggresado correctamente");
+            message.setHeaderText("Exito");
+            message.showAndWait();
+
+        }
+
     }
 
     @FXML
@@ -200,7 +243,6 @@ public class FrmnuevoPacienteController implements Initializable {
         }
 
     }
-
 
     class VideoTacker extends Thread {
 
