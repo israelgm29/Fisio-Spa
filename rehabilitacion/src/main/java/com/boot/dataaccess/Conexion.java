@@ -6,7 +6,8 @@
 package com.boot.dataaccess;
 
 import java.sql.*;
-import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,108 +15,32 @@ import java.util.*;
  */
 public class Conexion {
 
-    private Connection con;
-    final String DRIVER = "org.postgresql.Driver";
-    final String URL = "jdbc:postgresql://localhost:5432/hospital";
-    final String USUARIO = "postgres";
-    final String CLAVE = "03754";
+    public Connection con = null;
+    public Statement stm = null;
+    public ResultSet rs = null;
 
-    public void conectar() {
+    public void Conectar() {
+        String cadena = "jdbc:postgresql://localhost:5432/hospital?user=postgres&password=03754";
         try {
-            Class.forName(DRIVER);
-            try {
-                con = DriverManager.getConnection(URL, USUARIO, CLAVE);
-            } catch (SQLException e) {
-                System.out.println("Error al conectar:" + e.getMessage());
-            }
-        } catch (ClassNotFoundException e) {
-            System.out.println("Error al cargar el driver:" + e.getMessage());
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+           
+        }
+        try {
+            con = DriverManager.getConnection(cadena);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public ResultSet ejecutarQuery(String sql) {
-        ResultSet rst = null;
-        conectar();
+    public void Desconectar() {
         try {
-            Statement stm = con.createStatement();
-            rst = stm.executeQuery(sql);
+            con.close();
+            stm.close();
+            rs.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            desconectar();
-        }
-        return rst;
-    }
-
-    public ResultSet ejecutarQuery(String sql, List<Parametro> lst) {
-        ResultSet rst = null;
-        try {
-            conectar();
-            PreparedStatement pstm = con.prepareStatement(sql);
-            for (Parametro par : lst) {
-                if (par.getValor() instanceof java.util.Date) {
-                    pstm.setObject(par.getPosicion(),
-                            new java.sql.Date(((java.util.Date) par.getValor()).getTime()));
-                } else {
-                    pstm.setObject(par.getPosicion(), par.getValor());
-                }
-            }
-            rst = pstm.executeQuery();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        } finally {
-            desconectar();
-        }
-        return rst;
-    }
-
-    public int ejecutaComando(String sql) {
-        int numFilasAfectadas = 0;
-        try {
-            conectar();
-            Statement stm = con.createStatement();
-            numFilasAfectadas = stm.executeUpdate(sql);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        } finally {
-            desconectar();
-        }
-        return numFilasAfectadas;
-    }
-
-    public int ejecutaComando(String sql, List<Parametro> lst) {
-        int numFilasAfectadas = 0;
-        try {
-            conectar();
-            PreparedStatement pstm = con.prepareStatement(sql);
-            for (Parametro prm : lst) {
-                if (prm.getValor() instanceof java.util.Date) {
-//                    java.sql.Date fechaBD;
-//                    java.util.Date fechaOriginal = (java.util.Date) prm.getValor();
-//                    fechaBD = new java.sql.Date(fechaOriginal.getTime());
-//                    pstm.setObject(prm.getPosicion(), fechaBD);
-                    pstm.setObject(prm.getPosicion(), 
-                    new java.sql.Date(((java.util.Date)prm.getValor()).getTime()));
-                } else {
-                    pstm.setObject(prm.getPosicion(), prm.getValor());
-                }
-            }
-            numFilasAfectadas = pstm.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        } finally {
-            desconectar();
-        }
-        return numFilasAfectadas;
-    }
-
-    public void desconectar() {
-        if (con != null) {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 }
