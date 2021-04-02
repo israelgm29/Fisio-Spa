@@ -7,8 +7,10 @@ package com.boot.models;
 
 import com.boot.controller.FrmCargaController;
 import com.boot.dataaccess.Conexion;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,8 +19,6 @@ import java.util.logging.Logger;
  * @author develop
  */
 public class OperacionHistoriaC extends Conexion {
-
-    
 
     public int loginadmin(String us, String pass) {
 
@@ -32,7 +32,6 @@ public class OperacionHistoriaC extends Conexion {
             if (rs.next()) {
                 resultado = 1;
             }
-     
 
             return resultado;
         } catch (SQLException ex) {
@@ -42,7 +41,7 @@ public class OperacionHistoriaC extends Conexion {
     }
 
     public ResultSet Mostrarpacientes() {
-        String sql = "SELECT codigo, paciente, cedula, edad, foto, categoria FROM \"historia clinica\" ORDER BY codigo ASC";
+        String sql = "SELECT cedula,numhclinic,nombre,apellido_p,apellido_m, edad, foto, categoria FROM paciente ORDER BY nombre ASC";
         try {
             stm = con.createStatement();
             rs = stm.executeQuery(sql);
@@ -51,18 +50,22 @@ public class OperacionHistoriaC extends Conexion {
         }
         return rs;
     }
-    
-        public int InsertarPaciente(HistoriaClinica hc){
-        int band=0;
-        try{
-            String sql="INSERT INTO \"historia clinica\" values ("+hc.getPaciente()+",'"+hc.getCedula()+"','"+hc.getTelefono()+""
-                    + "',"+hc.getEdad()+","+hc.getSexo()+","+hc.getDireccion()+","+hc.getFecha_nacimiento()+""
-                    + ","+hc.getMail()+","+hc.getEstatura()+","+hc.getPeso()+","+hc.getOcupacion()+","+hc.getImagen()+""
-                    + ","+hc.getEnfermero()+","+hc.getCategoria()+");";
-            stm=con.createStatement();
-            band=stm.executeUpdate(sql);
-        }catch(SQLException e){
-            Logger.getLogger(HistoriaClinica.class.getName()).log(Level.SEVERE,null,e);
+
+    public int InsertarPaciente(Paciente hc) {
+        int band = 0;
+
+        try {
+            String sql = "INSERT INTO paciente(cedula,nombre,apellido_p,apellido_m,estadociv,telefono,edad,genero,direccion,"
+                    + "fecha_nac,mail,estatura,peso,ocupacion,foto,categoria)"
+                    + " values ('" + hc.getCedula()+ "','" + hc.getNombre()+ "','"+hc.getApellidop()+"','" +hc.getApellidom()+"','" +hc.getEstadocivil()+"','" + hc.getTelefono() + ""
+                    + "','" + hc.getEdad() + "','" + hc.getGenero()+ "','" + hc.getDireccion() + "','" + hc.getFecha_nacimiento() + ""
+                    + "','" + hc.getMail() + "','" + hc.getEstatura() + "','" + hc.getPeso() + "','" + hc.getOcupacion() + "','" + hc.getImagen() + ""
+                    + "','" + hc.getCategoria() + "')";
+            System.out.println(sql);
+            stm = con.createStatement();
+            band = stm.executeUpdate(sql);
+        } catch (SQLException e) {
+            Logger.getLogger(Paciente.class.getName()).log(Level.SEVERE, null, e);
         }
         return band;
     }
