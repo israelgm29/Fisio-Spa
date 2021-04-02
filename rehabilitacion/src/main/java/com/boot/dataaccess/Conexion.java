@@ -15,32 +15,29 @@ import java.util.logging.Logger;
  */
 public class Conexion {
 
-    public Connection con = null;
-    public Statement stm = null;
-    public ResultSet rs = null;
+    public static Connection con=null;
+    public static  Statement stm=null;
+    public static  ResultSet rs=null;
 
     public void Conectar() {
-        String cadena = "jdbc:postgresql://localhost:5432/hospital?user=postgres&password=03754";
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-           
-        }
-        try {
-            con = DriverManager.getConnection(cadena);
-        } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        try{
+            String cadena="jdbc:postgresql://localhost:5432/hospital";
+            con=DriverManager.getConnection(cadena,"postgres","03754");
+            Class.forName("org.postgresql.Driver"); 
+        }catch(ClassNotFoundException | SQLException e){
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE,null,e);
         }
     }
-
-    public void Desconectar() {
-        try {
+    
+    public void Desconectar(){
+        try{
             con.close();
             stm.close();
             rs.close();
-        } catch (SQLException e) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, e);
+        }catch(SQLException e){
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE,null,e);
         }
     }
+
+  
 }
