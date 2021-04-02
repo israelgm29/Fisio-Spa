@@ -1,194 +1,347 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import java.net.URL?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.RadialGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.boot.controller.FrmnuevoPacienteController">
-    <stylesheets>
-        <URL value="@/styles/frmnuevopaciente.css" />
-    </stylesheets>
+<AnchorPane id="AnchorPane" prefHeight="611.0" prefWidth="855.0" styleClass="AnchorPane" stylesheets="@../styles/frmnuevopaciente.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.boot.controller.FrmnuevoPacienteController">
    <children>
-      <Circle fx:id="imgPerfil" layoutX="136.0" layoutY="181.0" radius="69.0" stroke="TRANSPARENT" strokeType="INSIDE">
-         <fill>
-            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.4384746551513672" green="0.6205531358718872" blue="0.8026315569877625" />
-                     </color>
-                  </Stop>
-                  <Stop offset="0.4896296296296296">
-                     <color>
-                        <Color red="0.4945175349712372" green="0.5942251682281494" blue="0.8684210777282715" opacity="0.7300000190734863" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.4311999976634979" green="0.6074396371841431" blue="0.7699999809265137" />
-                     </color>
-                  </Stop>
-               </stops>
-            </RadialGradient>
-         </fill>
-      </Circle>
-      <JFXButton fx:id="btnTomar" contentDisplay="TOP" layoutX="24.0" layoutY="269.0" onAction="#TakeFoto" text="Tomar Foto">
-         <graphic>
-            <FontIcon fx:id="btnTomarFoto" iconLiteral="mdi-camera" iconSize="20" />
-         </graphic>
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font>
-      </JFXButton>
-      <JFXButton fx:id="btnCargar" contentDisplay="TOP" layoutX="154.0" layoutY="269.0" onAction="#ChargeFoto" text="Cargar Foto">
-         <graphic>
-            <FontIcon iconLiteral="mdi-cloud-upload" iconSize="20">
-               <font>
-                  <Font name="Liberation Serif" size="12.0" />
-               </font></FontIcon>
-         </graphic>
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font>
-      </JFXButton>
-      <Text fontSmoothingType="LCD" layoutX="389.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informacion Personal">
+      <Text fontSmoothingType="LCD" layoutX="260.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="Informacion Personal">
          <font>
             <Font name="Liberation Serif" size="16.0" />
          </font>
       </Text>
-      <Label alignment="CENTER_RIGHT" layoutX="491.0" layoutY="86.0" text="Cedula">
+      <Label layoutX="602.0" layoutY="430.0" text="Género">
          <font>
             <Font name="Liberation Serif" size="12.0" />
          </font>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
       </Label>
-      <Label layoutX="500.0" layoutY="116.0" text="Edad">
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="480.0" layoutY="152.0" text="Dirección">
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="494.0" layoutY="188.0" text="Género">
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="jtxtNombre" layoutX="564.0" layoutY="40.0" prefHeight="26.0" prefWidth="182.0">
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="JtxtCedula" layoutX="564.0" layoutY="68.0" prefHeight="26.0" prefWidth="62.0">
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font>
-      </JFXTextField>
-      <Spinner fx:id="jtxtEdad" editable="true" layoutX="564.0" layoutY="110.0" prefHeight="26.0" prefWidth="182.0" />
-      <JFXTextField fx:id="jtxtDireccion" layoutX="564.0" layoutY="138.0" prefHeight="26.0" prefWidth="182.0">
-         <font>
-            <Font name="Liberation Serif Bold" size="12.0" />
-         </font>
-      </JFXTextField>
-      <Label layoutX="434.0" layoutY="58.0" text="Nombre y Apellido">
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="cmbGenero" layoutX="564.0" layoutY="181.0" prefHeight="26.0" prefWidth="182.0" />
-      <Text fontSmoothingType="LCD" layoutX="367.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informacion del Paciente">
+      <Text fontSmoothingType="LCD" layoutX="260.0" layoutY="333.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="Informacion del Paciente">
          <font>
             <Font name="Liberation Serif" size="16.0" />
          </font>
       </Text>
-      <Label layoutX="495.0" layoutY="224.0" text="Correo">
+      <Label layoutX="586.0" layoutY="138.0" text="Correo">
          <font>
             <Font name="Liberation Serif" size="12.0" />
          </font>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
       </Label>
-      <Label layoutX="478.0" layoutY="255.0" text="Ocupación">
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="jtxtCorreo" layoutX="564.0" layoutY="209.0" prefHeight="26.0" prefWidth="182.0">
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font></JFXTextField>
-      <JFXTextField fx:id="jtxtOcupacion" layoutX="564.0" layoutY="244.0" prefHeight="26.0" prefWidth="182.0">
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font></JFXTextField>
-      <Label layoutX="473.0" layoutY="342.0" text="Estatura">
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="488.0" layoutY="375.0" text="Peso">
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="411.0" layoutY="408.0" text="Fecha de Nacimiento">
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="jtxtEstatura" layoutX="564.0" layoutY="329.0" prefHeight="26.0" prefWidth="62.0" promptText="Ejemp:1.74">
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font></JFXTextField>
-      <JFXTextField fx:id="JtxtPeso" layoutX="564.0" layoutY="360.0" prefHeight="26.0" prefWidth="62.0" promptText="Ejemp: 60">
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font></JFXTextField>
-      <Text fontSmoothingType="LCD" layoutX="121.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Foto ">
+      <Text fontSmoothingType="LCD" layoutX="93.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Foto ">
          <font>
             <Font name="Liberation Serif" size="14.0" />
          </font>
       </Text>
-      <DatePicker fx:id="dtpickFechanac" layoutX="564.0" layoutY="402.0" prefHeight="26.0" prefWidth="182.0" />
-      <JFXTextField fx:id="jtxtTelefono" layoutX="683.0" layoutY="68.0" prefHeight="26.0" prefWidth="62.0">
+      <Label layoutX="424.0" layoutY="386.0" text="metros">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="425.0" layoutY="428.0" text="Kg">
+         <font>
+            <Font name="Liberation Serif" size="12.0" />
+         </font>
+      </Label>
+      <Separator layoutX="260.0" layoutY="45.0" prefHeight="5.0" prefWidth="149.0" />
+      <Separator layoutX="260.0" layoutY="342.0" prefHeight="5.0" prefWidth="172.0" />
+      <MFXTextField fx:id="jtxtCateg" alignment="CENTER" editable="false" layoutX="86.0" layoutY="356.0" prefHeight="26.0" prefWidth="52.0" styleClass="btninput" text="P" />
+      <Text layoutX="82.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titles" text="Categoria">
+         <font>
+            <Font name="Liberation Serif" size="14.0" />
+         </font>
+      </Text>
+      <FontIcon iconLiteral="mdi-mail-ru" iconSize="18" layoutX="564.0" layoutY="161.0" />
+      <GridPane layoutX="257.0" layoutY="53.0" prefHeight="60.0" prefWidth="580.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Apellido Materno" GridPane.columnIndex="2">
+               <font>
+                  <Font name="Liberation Serif" size="12.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Apellido Paterno" GridPane.columnIndex="1">
+               <font>
+                  <Font name="Liberation Serif" size="12.0" />
+               </font>
+            </Label>
+            <Label text="Nombres">
+               <font>
+                  <Font name="Liberation Serif" size="12.0" />
+               </font>
+            </Label>
+            <JFXTextField id="jtxtinputs" fx:id="jtxtNombre" prefHeight="23.0" prefWidth="140.0" styleClass="btninput" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Liberation Serif" size="12.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets right="20.0" />
+               </padding>
+            </JFXTextField>
+            <JFXTextField fx:id="jtxtApellidop" prefHeight="23.0" prefWidth="140.0" styleClass="btninput" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <JFXTextField fx:id="jtxtApellidom" prefHeight="23.0" prefWidth="140.0" styleClass="btninput" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </JFXTextField>
+         </children>
+      </GridPane>
+      <GridPane layoutX="259.0" layoutY="128.0" prefHeight="67.0" prefWidth="212.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.0" minWidth="10.0" prefWidth="115.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="165.0" minWidth="10.0" prefWidth="115.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label alignment="CENTER_RIGHT" text="Cedula" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font name="Liberation Serif" size="12.0" />
+               </font>
+               <padding>
+                  <Insets left="25.0" />
+               </padding>
+            </Label>
+            <JFXTextField id="jtxtinputs" fx:id="JtxtCedula" prefHeight="26.0" prefWidth="140.0" styleClass="btninput" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Liberation Serif" size="12.0" />
+               </font>
+               <padding>
+                  <Insets right="20.0" />
+               </padding>
+            </JFXTextField>
+            <Label text="Teléfono" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font name="Liberation Serif" size="12.0" />
+               </font>
+               <padding>
+                  <Insets left="25.0" />
+               </padding>
+            </Label>
+            <JFXTextField id="jtxtinputs" fx:id="jtxtTelefono" prefHeight="26.0" prefWidth="140.0" styleClass="btninput" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Liberation Serif" size="12.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </JFXTextField>
+            <FontIcon iconColor="TRANSPARENT" iconLiteral="mdi-account-card-details" iconSize="22" stroke="#0d6524" GridPane.valignment="BOTTOM" />
+            <FontIcon iconLiteral="mdi-cellphone-android" iconSize="20" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </FontIcon>
+         </children>
+      </GridPane>
+      <JFXTextField id="jtxtinputs" fx:id="jtxtCorreo" layoutX="568.0" layoutY="166.0" prefHeight="26.0" prefWidth="263.0" styleClass="btninput">
          <font>
             <Font name="Liberation Serif" size="12.0" />
          </font>
       </JFXTextField>
-      <Label layoutX="631.0" layoutY="86.0" text="Teléfono">
+      <GridPane layoutX="257.0" layoutY="206.0" prefHeight="60.0" prefWidth="580.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Dirección">
+               <font>
+                  <Font name="Liberation Serif" size="12.0" />
+               </font>
+               <padding>
+                  <Insets left="25.0" top="10.0" />
+               </padding>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <JFXTextField id="jtxtinputs" fx:id="jtxtOcupacion" alignment="BASELINE_CENTER" prefHeight="26.0" prefWidth="182.0" styleClass="btninput" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Liberation Serif" size="12.0" />
+               </font>
+               <padding>
+                  <Insets right="40.0" />
+               </padding>
+            </JFXTextField>
+            <FontIcon />
+            <Label text="Ocupación" GridPane.columnIndex="1">
+               <font>
+                  <Font name="Liberation Serif" size="12.0" />
+               </font>
+               <padding>
+                  <Insets left="40.0" top="10.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <JFXTextField id="jtxtinputs" fx:id="jtxtDireccion" prefHeight="26.0" prefWidth="182.0" styleClass="btninput" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Liberation Serif Bold" size="12.0" />
+               </font>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </JFXTextField>
+            <FontIcon fontSmoothingType="LCD" iconColor="#e40c0c" iconLiteral="mdi-map-marker-radius" iconSize="23" selectionFill="#360202" stroke="BLACK" wrappingWidth="29.175781250000057" />
+            <FontIcon fontSmoothingType="LCD" iconColor="#0f2fbc" iconLiteral="mdi-account-location" iconSize="23" selectionFill="#2b20c9" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </FontIcon>
+         </children>
+      </GridPane>
+      <GridPane layoutX="302.0" layoutY="368.0" prefHeight="114.0" prefWidth="112.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="45.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.0" minWidth="10.0" prefWidth="57.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Estatura">
+               <font>
+                  <Font name="Liberation Serif" size="12.0" />
+               </font>
+            </Label>
+            <JFXTextField id="jtxtinputs" fx:id="jtxtEstatura" alignment="CENTER" prefHeight="26.0" prefWidth="62.0" promptText="Ejm:1.74" styleClass="btninput" GridPane.columnIndex="1">
+               <font>
+                  <Font name="Liberation Serif" size="12.0" />
+               </font>
+            </JFXTextField>
+            <Label text="Peso" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Liberation Serif" size="12.0" />
+               </font>
+            </Label>
+            <JFXTextField id="jtxtinputs" fx:id="JtxtPeso" alignment="CENTER" prefHeight="26.0" prefWidth="62.0" promptText="Ejm:60.5" styleClass="btninput" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Liberation Serif" size="12.0" />
+               </font>
+            </JFXTextField>
+            <Label text="Edad" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Liberation Serif" size="12.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Label>
+            <Spinner fx:id="jtxtEdad" editable="true" prefHeight="26.0" prefWidth="69.0" styleClass="btninput" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="603.0" layoutY="363.0" prefHeight="60.0" prefWidth="162.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <MFXDatePicker fx:id="dtpickFechanac" alignment="BOTTOM_LEFT" lineColor="#17a2b8b2" maxHeight="-Infinity" maxWidth="-Infinity" pickerColor="#102cc6" prefHeight="25.0" prefWidth="131.0" GridPane.rowIndex="1">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </MFXDatePicker>
+            <Label text="Fecha de Nacimiento">
+               <font>
+                  <Font name="Liberation Serif" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+      <JFXComboBox fx:id="cmbGenero" layoutX="602.0" layoutY="459.0" prefHeight="23.0" prefWidth="131.0" promptText="Seleccionar" styleClass="btninput" visibleRowCount="4" />
+      <JFXButton fx:id="btnGuardar" alignment="CENTER" defaultButton="true" layoutX="419.0" layoutY="558.0" onAction="#Guardad" prefHeight="28.0" prefWidth="94.0" ripplerFill="#22040400" style="-fx-background-color: #2b7c8c; -fx-background-radius: 20;" styleClass="btniacction" text="Guardar" textFill="WHITE" wrapText="true">
          <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="637.0" layoutY="342.0" text="metros">
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="641.0" layoutY="374.0" text="Kg">
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
-         </font>
-      </Label>
-      <JFXButton fx:id="btnGuardar" alignment="CENTER" layoutX="533.0" layoutY="451.0" onAction="#Guardad" prefHeight="34.0" prefWidth="94.0" style="-fx-background-color: #2d467d; -fx-background-radius: 20;" text="Guardar" textFill="WHITE">
-         <font>
-            <Font name="Liberation Serif" size="12.0" />
+            <Font name="Liberation Serif Bold" size="13.0" />
          </font>
          <graphic>
-            <FontIcon iconColor="WHITE" iconLiteral="mdi-content-save" iconSize="20" />
+            <FontIcon iconColor="WHITE" iconLiteral="mdi-content-save" iconSize="18" />
          </graphic>
       </JFXButton>
+      <JFXButton fx:id="btnCancel" layoutX="291.0" layoutY="558.0" onAction="#exitWindows" prefHeight="28.0" prefWidth="86.0" style="-fx-border-color: #666666; -fx-border-radius: 20; -fx-text-fill: #666666; -fx-background-radius: 20;" text="Cancelar" />
+      <Pane layoutX="14.0" layoutY="53.0" prefHeight="263.0" prefWidth="196.0" style="-fx-background-color: #101213; -fx-border-radius: 20; -fx-background-radius: 20;">
+         <children>
+            <JFXButton fx:id="btnTomar" contentDisplay="TOP" layoutX="54.0" layoutY="216.0" onAction="#tomarFoto" prefHeight="46.0" prefWidth="74.0" text="Tomar Foto" textFill="#f8f4f4">
+               <graphic>
+                  <FontIcon fx:id="btnTomarFoto" iconColor="#f8f1f1" iconLiteral="mdi-camera" iconSize="17" />
+               </graphic>
+               <font>
+                  <Font name="Liberation Serif" size="11.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnCargar" contentDisplay="TOP" layoutX="119.0" layoutY="218.0" onAction="#ChargeFoto" text="Cargar Foto" textFill="WHITE">
+               <graphic>
+                  <FontIcon iconColor="#b5bfc3" iconLiteral="mdi-cloud-upload" iconSize="17">
+                     <font>
+                        <Font name="Liberation Serif" size="12.0" />
+                     </font>
+                  </FontIcon>
+               </graphic>
+               <font>
+                  <Font name="Liberation Serif" size="11.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="5.0" layoutY="226.0" onAction="#IniciarCamara" text="On">
+               <graphic>
+                  <FontIcon iconColor="#fcfcfc" iconLiteral="mdi-video" iconSize="13" selectionFill="#c91515" />
+               </graphic>
+               <font>
+                  <Font name="Liberation Serif" size="13.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </Pane>
+      <ImageView fx:id="imgPerfil" fitHeight="189.0" fitWidth="172.0" layoutX="18.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" styleClass="imgProfile" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="606.0">
+         <image>
+            <Image url="@../../../../../../../Documentos/Hearthstone-o.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
