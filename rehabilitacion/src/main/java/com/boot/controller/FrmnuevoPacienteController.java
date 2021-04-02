@@ -1,13 +1,11 @@
 package com.boot.controller;
 
-import com.boot.models.HistoriaClinica;
+import com.boot.models.Paciente;
 import com.boot.models.OperacionHistoriaC;
 import com.github.sarxos.webcam.Webcam;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.validation.RequiredFieldValidator;
-import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.awt.Dimension;
@@ -20,26 +18,30 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.sql.Date;
-import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import org.apache.commons.io.FilenameUtils;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.javafx.Icon;
 
 /**
  * FXML Controller class
@@ -51,63 +53,63 @@ public class FrmnuevoPacienteController implements Initializable {
     @FXML
     private FontIcon btnTomarFoto;
     @FXML
-    private JFXButton btnCargar;
-    @FXML
-    private JFXTextField jtxtNombre;
-    @FXML
-    private JFXTextField JtxtCedula;
+    private JFXButton btnCargar, btnTomar, btnGuardar, btnCancel;
     @FXML
     private Spinner<Integer> jtxtEdad;
     @FXML
-    private JFXTextField jtxtDireccion;
+    private JFXComboBox<String> cmbGenero;
     @FXML
-    private MFXComboBox<String> cmbGenero;
+    private JFXTextField jtxtCorreo, jtxtOcupacion, jtxtEstatura, JtxtPeso, jtxtTelefono, jtxtDireccion;
     @FXML
-    private JFXTextField jtxtCorreo;
-    @FXML
-    private JFXTextField jtxtOcupacion;
-    @FXML
-    private JFXTextField jtxtEstatura;
-    @FXML
-    private JFXTextField JtxtPeso;
+    private JFXTextField JtxtCedula, jtxtNombre,jtxtApellidop,jtxtApellidom;
     @FXML
     private MFXDatePicker dtpickFechanac;
     @FXML
-    private JFXTextField jtxtTelefono;
-    @FXML
     private ImageView imgPerfil;
     @FXML
-    private JFXButton btnTomar;
-    @FXML
-    private JFXButton btnGuardar;
-    @FXML
-    private MFXButton onCamera;
-
-    public static Webcam webcam; // For taking pictures
-    public static boolean isCapture = false; // For stop & resume thread of camera
-    private String pathFoto = null;
-    @FXML
     private MFXTextField jtxtCateg;
-    @FXML
-    private MFXTextField asd;
+
+    private Paciente paciente;
+    private ObservableList<Paciente> pacientes;
+
+    public static Webcam webcam; // iniciar camara
+
+    public static boolean isCapture = false; // encender o parar camara
+
+    private String pathFoto = null;
+
+    ValidationSupport validationSupport = new ValidationSupport();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MMM-dd");
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         cmbGenero.getItems().add("Masculino");
         cmbGenero.getItems().add("Femenino");
         cmbGenero.getItems().add("LGBTI");
         cmbGenero.getItems().add("Otro");
-        RequiredFieldValidator validator = new RequiredFieldValidator();
-        validator.setMessage("campo obligatorio");
-        validator.setIcon(new FontIcon("mdi-account"));
-        jtxtNombre.getValidators().add(validator);
-        jtxtNombre.focusedProperty().addListener((o, oldVal, newVal) -> {
-            if (!newVal) {
-                jtxtNombre.validate();
-            }
-        });
+        SpinnerValueFactory<Integer> valor = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1);
+        jtxtEdad.setValueFactory(valor);
+        validationSupport.registerValidator(jtxtNombre, Validator.createEmptyValidator("Text is required"));
+//        validationSupport.registerValidator(JtxtCedula, Validator.createEmptyValidator("Text is required"));
+//        validationSupport.registerValidator(jtxtCorreo, Validator.createEmptyValidator("Text is required"));
+//        validationSupport.registerValidator(jtxtDireccion, Validator.createEmptyValidator("Text is required"));
+//        validationSupport.registerValidator(jtxtEstatura, Validator.createEmptyValidator("Text is required"));
+//        validationSupport.registerValidator(jtxtOcupacion, Validator.createEmptyValidator("Text is required"));
+//        validationSupport.registerValidator(jtxtTelefono, Validator.createEmptyValidator("Text is required"));
+//        validationSupport.registerValidator(JtxtPeso, Validator.createEmptyValidator("Text is required"));
+//        validationSupport.registerValidator(jtxtEdad, Validator.createEmptyValidator("Text is required"));
 
-        // TODO
+        JtxtPeso.addEventHandler(KeyEvent.KEY_TYPED, event -> onlyNumber(event));
+
+        jtxtEstatura.addEventHandler(KeyEvent.KEY_TYPED, event -> onlyNumber(event));
+        jtxtTelefono.addEventHandler(KeyEvent.KEY_TYPED, event -> onlyNumber(event));
+        JtxtCedula.addEventHandler(KeyEvent.KEY_TYPED, event -> onlyNumber(event));
+    }
+
+    public void initAttributtes(ObservableList<Paciente> paciente) {
+        this.pacientes = paciente;
     }
 
     @FXML
@@ -150,9 +152,7 @@ public class FrmnuevoPacienteController implements Initializable {
                 imgPerfil.setImage(image);
 
                 Path from = Paths.get(imgFile.toURI());
-                System.out.println(destino);
                 Path to = Paths.get(destino + imgFile.getName());
-                System.out.println(to);
                 CopyOption[] options = new CopyOption[]{
                     StandardCopyOption.REPLACE_EXISTING,
                     StandardCopyOption.COPY_ATTRIBUTES
@@ -175,33 +175,78 @@ public class FrmnuevoPacienteController implements Initializable {
 
     @FXML
     private void Guardad(ActionEvent event) {
-        System.out.println(pathFoto);
 
-        HistoriaClinica hc = new HistoriaClinica();
-        hc.setPaciente(jtxtNombre.getText());
-        hc.setCedula(JtxtCedula.getText());
-        hc.setTelefono(jtxtTelefono.getText());
-        hc.setSexo(cmbGenero.getSelectedValue());
-        hc.setDireccion(jtxtDireccion.getText());
-        hc.setMail(jtxtCorreo.getText());
-        hc.setOcupacion(jtxtOcupacion.getText());
-        hc.setImagen(pathFoto);
-        hc.setCategoria(jtxtCateg.getText());
-        hc.setEdad(jtxtEdad.getValue());
-        hc.setEstatura(Double.parseDouble(jtxtEstatura.getText()));
-        hc.setPeso(Double.parseDouble(JtxtPeso.getText()));
-        hc.setFecha_nacimiento(dtpickFechanac.getDate());
-
-        OperacionHistoriaC opc = new OperacionHistoriaC();
-        if (opc.InsertarPaciente(hc) > 0) {
-            Alert message = new Alert(Alert.AlertType.INFORMATION);
+        if (jtxtNombre.getText().isEmpty() || JtxtCedula.getText().isEmpty() || JtxtPeso.getText().isEmpty()
+                || jtxtCorreo.getText().isEmpty() || jtxtEdad.getValue().equals("") || jtxtDireccion.getText().isEmpty()
+                || jtxtTelefono.getText().isEmpty() || cmbGenero.getValue().equals("Seleccionar")
+                || jtxtOcupacion.getText().isEmpty() || jtxtEstatura.getText().isEmpty()) 
+        {
+            
+            Alert message = new Alert(Alert.AlertType.WARNING);
             message.setTitle("FISIO-SPA");
-            message.setContentText("Paciente inggresado correctamente");
-            message.setHeaderText("Exito");
+            message.setContentText("Debe llenar todos los campos y agregar una foto al paciente");
+            message.setHeaderText("¡Advertencia!");
             message.showAndWait();
 
-        }
+        } else {
+            
+            dtpickFechanac.setDateFormatter(formatter);
+            Paciente hc = new Paciente();
+            hc.setCedula(JtxtCedula.getText());
+            hc.setNombre(jtxtNombre.getText());
+            hc.setApellidop(jtxtApellidop.getText());
+            hc.setApellidom(jtxtApellidom.getText());
+            hc.setTelefono(jtxtTelefono.getText());
+            hc.setGenero(cmbGenero.getValue());
+            hc.setDireccion(jtxtDireccion.getText());
+            hc.setMail(jtxtCorreo.getText());
+            hc.setOcupacion(jtxtOcupacion.getText());
+            hc.setImagen(pathFoto);
+            hc.setCategoria(jtxtCateg.getText());
+            hc.setEdad(jtxtEdad.getValue());
+            hc.setEstatura(Double.parseDouble(jtxtEstatura.getText()));
+            hc.setPeso(Double.parseDouble(JtxtPeso.getText()));
+            hc.setFecha_nacimiento(dtpickFechanac.getDate());
 
+            OperacionHistoriaC opc = new OperacionHistoriaC();
+            opc.Conectar();
+//            if(!clinicas.contains(hc)){
+//             if (opc.InsertarPaciente(hc) > 0) {
+//                Alert message = new Alert(Alert.AlertType.INFORMATION);
+//                message.setTitle("FISIO-SPA");
+//                message.setContentText("Paciente ingresado correctamente");
+//                message.setHeaderText("Exito");
+//                message.showAndWait();
+//
+//            } else {
+//             Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setHeaderText(null);
+//            alert.setTitle("Error");
+//            alert.setContentText("La persona ya existe");
+//            alert.showAndWait();
+//            }
+//
+//        }
+// Compruebo si la persona existe
+            if (opc.InsertarPaciente(hc) > 0 && !pacientes.contains(hc)) {
+                this.paciente = hc;
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText(null);
+                alert.setTitle("Informacion");
+                alert.setContentText("Se ha añadido correctamente");
+                alert.showAndWait();
+
+                // Cerrar ventana
+                Stage stage = (Stage) this.btnGuardar.getScene().getWindow();
+                stage.close();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("La persona ya existe");
+                alert.showAndWait();
+            }
+        }
     }
 
     @FXML
@@ -234,7 +279,6 @@ public class FrmnuevoPacienteController implements Initializable {
             try { // Save picture with .png extension
             ImageIO.write(SwingFXUtils.fromFXImage(imgPerfil.getImage(), null), "PNG", file);
             String dataPath = new String(file.getAbsolutePath());
-            System.out.println(dataPath);
             new VideoTacker().stop();
 
         } catch (IOException ex) {
@@ -242,6 +286,31 @@ public class FrmnuevoPacienteController implements Initializable {
 
         }
 
+    }
+
+    public void onlyNumber(KeyEvent keyEvent) {
+        try {
+            char key = keyEvent.getCharacter().charAt(0);
+
+            if (!Character.isDigit(key)) {
+                keyEvent.consume();
+            }
+
+        } catch (Exception ex) {
+        }
+    }
+
+
+    @FXML
+    private void exitWindows(ActionEvent event) {
+        Stage stage = (Stage) this.btnCancel.getScene().getWindow();
+        stage.close();
+    }
+    
+    
+
+    public Paciente getPaciente() {
+        return paciente;
     }
 
     class VideoTacker extends Thread {
