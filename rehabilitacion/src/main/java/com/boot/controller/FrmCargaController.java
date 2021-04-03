@@ -22,6 +22,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -130,13 +131,24 @@ public class FrmCargaController implements Initializable {
     @FXML
     private void SingUp(ActionEvent event) {
         try {
-            Stage signup = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/frmRegistrar.fxml"));
-
-            Scene scene = new Scene(root);
-            signup.setScene(scene);
-            signup.show();
-
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/frmRegistrar.fxml"));
+         
+         Parent root = loader.load();
+         
+         FrmRegistrarController controlador = loader.getController();
+         
+         Scene scene= new Scene(root);
+         Stage stage = new Stage();
+         
+         stage.setScene(scene);
+         stage.initStyle(StageStyle.UNDECORATED);
+         stage.show();
+         
+         stage.setOnCloseRequest(e-> controlador.closewindows());
+         Stage stage1 = (Stage) this.btnRegistrer.getScene().getWindow();
+         stage1.close();
+         
+            
         } catch (IOException ex) {
             Logger.getLogger(FrmCargaController.class.getName()).log(Level.SEVERE, null, ex);
         }

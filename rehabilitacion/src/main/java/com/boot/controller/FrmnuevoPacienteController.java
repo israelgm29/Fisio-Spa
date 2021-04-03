@@ -28,10 +28,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -61,7 +59,7 @@ public class FrmnuevoPacienteController implements Initializable {
     @FXML
     private JFXTextField jtxtCorreo, jtxtOcupacion, jtxtEstatura, JtxtPeso, jtxtTelefono, jtxtDireccion;
     @FXML
-    private JFXTextField JtxtCedula, jtxtNombre,jtxtApellidop,jtxtApellidom;
+    private JFXTextField JtxtCedula, jtxtNombre, jtxtApellidop, jtxtApellidom;
     @FXML
     private MFXDatePicker dtpickFechanac;
     @FXML
@@ -80,7 +78,6 @@ public class FrmnuevoPacienteController implements Initializable {
 
     ValidationSupport validationSupport = new ValidationSupport();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MMM-dd");
-    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -113,6 +110,42 @@ public class FrmnuevoPacienteController implements Initializable {
     }
 
     @FXML
+    private void tomarFoto(ActionEvent event) {
+        if (IniciarCamara() == false) {
+            Alert message = new Alert(Alert.AlertType.ERROR);
+            message.setTitle("FISIO-SPA");
+            message.setContentText("Debe encender primero la camara");
+            message.setHeaderText("¡Error!");
+            message.showAndWait();
+        } else {
+
+            isCapture = true;
+            Stage open = new Stage();
+            FileChooser archivo = new FileChooser();
+            File recordsDir = new File(System.getProperty("user.home"), "Documentos/imagesPacientes");
+            if (!recordsDir.exists()) {
+                recordsDir.mkdirs();
+            }
+            archivo.setInitialDirectory(recordsDir);
+            File file = archivo.showSaveDialog(open);
+
+            if (file != null)
+            try { // Save picture with .png extension
+                ImageIO.write(SwingFXUtils.fromFXImage(imgPerfil.getImage(), null), "PNG", file);
+                String dataPath = new String(file.getAbsolutePath());
+                System.out.println(dataPath);
+                pathFoto = "file:" + dataPath;
+                webcam.close();
+
+            } catch (IOException ex) {
+                ex.printStackTrace(); // Can't save picture
+
+            }
+        }
+
+    }
+
+    @FXML
     private void ChargeFoto(ActionEvent event) {
         Stage open = new Stage();
         String destino = new String(System.getProperty("user.home").toString() + "/Documentos/imagesPacientes/");
@@ -126,39 +159,35 @@ public class FrmnuevoPacienteController implements Initializable {
 
         // Agregar filtros para facilitar la busqueda
         fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All imagenes", "*.*"),
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
                 new FileChooser.ExtensionFilter("PNG", "*.png")
         );
         // Obtener la imagen seleccionada
         File imgFile = fileChooser.showOpenDialog(open);
 
-        try {
-            String ext1 = FilenameUtils.getExtension(imgFile.getCanonicalPath());
-
-            if (ext1.compareTo("jpg") != 0 && ext1.compareTo("png") != 0) {
-                Alert error = new Alert(Alert.AlertType.ERROR);
-                error.setTitle("Error");
-                error.setHeaderText("Tipo de archivo no valido");
-                error.setContentText("Seleccione archivos que sean solo imagenes o con extencion .jpg, .");
-                error.showAndWait();
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(FrmnuevoPacienteController.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
         if (imgFile != null) {
             try {
-                Image image = new Image("file:" + imgFile.getAbsolutePath());
-                imgPerfil.setImage(image);
+                String ext1 = FilenameUtils.getExtension(imgFile.getCanonicalPath());
+                if (ext1.compareTo("jpg") != 0 && ext1.compareTo("png") != 0) {
+                    Alert error = new Alert(Alert.AlertType.ERROR);
+                    error.setTitle("Error");
+                    error.setHeaderText("Tipo de archivo no valido");
+                    error.setContentText("Seleccione archivos que sean solo imagenes con extencion (.jpg),(.png)");
+                    error.showAndWait();
+                } else {
+                    Image image = new Image("file:" + imgFile.getAbsolutePath());
+                    imgPerfil.setImage(image);
 
-                Path from = Paths.get(imgFile.toURI());
-                Path to = Paths.get(destino + imgFile.getName());
-                CopyOption[] options = new CopyOption[]{
-                    StandardCopyOption.REPLACE_EXISTING,
-                    StandardCopyOption.COPY_ATTRIBUTES
-                };
-                Files.copy(from, to, options);
-                pathFoto = "file:" + to.toString();
+                    Path from = Paths.get(imgFile.toURI());
+                    Path to = Paths.get(destino + imgFile.getName());
+                    CopyOption[] options = new CopyOption[]{
+                        StandardCopyOption.REPLACE_EXISTING,
+                        StandardCopyOption.COPY_ATTRIBUTES
+                    };
+                    Files.copy(from, to, options);
+                    pathFoto = "file:" + to.toString();
+                }
 
             } catch (IOException ex) {
                 Logger.getLogger(FrmnuevoPacienteController.class.getName()).log(Level.SEVERE, null, ex);
@@ -168,7 +197,7 @@ public class FrmnuevoPacienteController implements Initializable {
             Alert error = new Alert(Alert.AlertType.ERROR);
             error.setTitle("Error");
             error.setHeaderText("Tipo de archivo no valido");
-            error.setContentText("Seleccione archivos que sean solo imagenes o con extencion .jpg, .");
+            error.setContentText("Seleccione uan imagen, .");
         }
 
     }
@@ -178,10 +207,9 @@ public class FrmnuevoPacienteController implements Initializable {
 
         if (jtxtNombre.getText().isEmpty() || JtxtCedula.getText().isEmpty() || JtxtPeso.getText().isEmpty()
                 || jtxtCorreo.getText().isEmpty() || jtxtEdad.getValue().equals("") || jtxtDireccion.getText().isEmpty()
-                || jtxtTelefono.getText().isEmpty() || cmbGenero.getValue().equals("Seleccionar")
-                || jtxtOcupacion.getText().isEmpty() || jtxtEstatura.getText().isEmpty()) 
-        {
-            
+                || jtxtTelefono.getText().isEmpty() || cmbGenero.getValue().equals("")
+                || jtxtOcupacion.getText().isEmpty() || jtxtEstatura.getText().isEmpty()||pathFoto == null) {
+
             Alert message = new Alert(Alert.AlertType.WARNING);
             message.setTitle("FISIO-SPA");
             message.setContentText("Debe llenar todos los campos y agregar una foto al paciente");
@@ -189,7 +217,7 @@ public class FrmnuevoPacienteController implements Initializable {
             message.showAndWait();
 
         } else {
-            
+
             dtpickFechanac.setDateFormatter(formatter);
             Paciente hc = new Paciente();
             hc.setCedula(JtxtCedula.getText());
@@ -210,26 +238,9 @@ public class FrmnuevoPacienteController implements Initializable {
 
             OperacionHistoriaC opc = new OperacionHistoriaC();
             opc.Conectar();
-//            if(!clinicas.contains(hc)){
-//             if (opc.InsertarPaciente(hc) > 0) {
-//                Alert message = new Alert(Alert.AlertType.INFORMATION);
-//                message.setTitle("FISIO-SPA");
-//                message.setContentText("Paciente ingresado correctamente");
-//                message.setHeaderText("Exito");
-//                message.showAndWait();
-//
-//            } else {
-//             Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setHeaderText(null);
-//            alert.setTitle("Error");
-//            alert.setContentText("La persona ya existe");
-//            alert.showAndWait();
-//            }
-//
-//        }
-// Compruebo si la persona existe
+//          Compruebo si la persona existe
             if (opc.InsertarPaciente(hc) > 0 && !pacientes.contains(hc)) {
-                this.paciente = hc;
+//                this.paciente = hc;
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText(null);
                 alert.setTitle("Informacion");
@@ -250,41 +261,23 @@ public class FrmnuevoPacienteController implements Initializable {
     }
 
     @FXML
-    void IniciarCamara(ActionEvent event) {
+    boolean IniciarCamara() {
+        boolean isOn = false;
         /* Init camera */
         webcam = Webcam.getDefault();
-        if (webcam == null) {
-            System.out.println("Camera not found !");
-            System.exit(-1);
+        if (isOn != false) {
+            if (webcam == null) {
+                System.out.println("Camera not found !");
+                System.exit(-1);
+            } else {
+
+                webcam.setViewSize(new Dimension(640, 480));
+                webcam.open();
+                isOn = true;
+                new VideoTacker().start();
+            }
         }
-        webcam.setViewSize(new Dimension(640, 480));
-        webcam.open();
-
-        new VideoTacker().start();
-    }
-
-    @FXML
-    private void tomarFoto(ActionEvent event) {
-        isCapture = true;
-        Stage open = new Stage();
-        FileChooser archivo = new FileChooser();
-        File recordsDir = new File(System.getProperty("user.home"), "Documentos/imagesPacientes");
-        if (!recordsDir.exists()) {
-            recordsDir.mkdirs();
-        }
-        archivo.setInitialDirectory(recordsDir);
-        File file = archivo.showSaveDialog(open);
-
-        if (file != null)
-            try { // Save picture with .png extension
-            ImageIO.write(SwingFXUtils.fromFXImage(imgPerfil.getImage(), null), "PNG", file);
-            String dataPath = new String(file.getAbsolutePath());
-            new VideoTacker().stop();
-
-        } catch (IOException ex) {
-            ex.printStackTrace(); // Can't save picture
-
-        }
+        return isOn;
 
     }
 
@@ -300,14 +293,11 @@ public class FrmnuevoPacienteController implements Initializable {
         }
     }
 
-
     @FXML
     private void exitWindows(ActionEvent event) {
         Stage stage = (Stage) this.btnCancel.getScene().getWindow();
         stage.close();
     }
-    
-    
 
     public Paciente getPaciente() {
         return paciente;

@@ -1,6 +1,6 @@
 package com.boot.controller;
 
-import com.boot.models.HistoriaClinica;
+import com.boot.models.Paciente;
 import com.boot.models.OperacionHistoriaC;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -33,6 +33,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -57,19 +58,19 @@ public class FrmPrincipalController implements Initializable {
     @FXML
     private BorderPane principal;
     @FXML
-    private TableView<HistoriaClinica> tableSignos;
+    private TableView<Paciente> tableSignos;
     @FXML
-    private TableColumn<HistoriaClinica, String> clmCategoria;
+    private TableColumn<Paciente, String> clmCategoria;
     @FXML
-    private TableColumn<HistoriaClinica, Integer> clmHclinica;
+    private TableColumn<Paciente, Integer> clmHclinica;
     @FXML
-    private TableColumn<HistoriaClinica, String> clmNombre;
+    private TableColumn<Paciente, String> clmNombre, clmApellido;
     @FXML
-    private TableColumn<HistoriaClinica, String> clmCedula;
+    private TableColumn<Paciente, String> clmCedula;
     @FXML
-    private TableColumn<HistoriaClinica, Integer> clmEdad;
+    private TableColumn<Paciente, Integer> clmEdad;
     @FXML
-    private TableColumn<HistoriaClinica, String> clmFoto;
+    private TableColumn<Paciente, String> clmFoto;
     @FXML
     private JFXTextField jtxtNombre;
     @FXML
@@ -95,17 +96,15 @@ public class FrmPrincipalController implements Initializable {
     @FXML
     private Label jtxthora;
     @FXML
-    private JFXTextArea jtxaAntec;
-    @FXML
-    private JFXTextArea jtxaSintoma;
-
-    private static FrmPrincipalController instance; // instancia del controlador 
-
-    int index = -1;
+    private JFXTextArea jtxaAntec, jtxaSintoma;
     @FXML
     private JFXTextField jtxtSatOx;
     @FXML
     private MenuItem btnewUser;
+
+    private static FrmPrincipalController instance; // instancia del controlador 
+
+    int index = -1;
 
     public FrmPrincipalController() {
         instance = this;
@@ -115,35 +114,8 @@ public class FrmPrincipalController implements Initializable {
         return instance;
     }
 
-    ObservableList<HistoriaClinica> pacientes;
-    ObservableList<HistoriaClinica> filtropacientes;
-
-    private ObservableList<HistoriaClinica> cargarTabla() {
-        ObservableList<HistoriaClinica> hclinicas = FXCollections.observableArrayList();
-        OperacionHistoriaC ophc = new OperacionHistoriaC();
-        ophc.Conectar();
-        ResultSet rst = ophc.Mostrarpacientes();
-        
-        try {
-            
-            while (rst.next()) {
-                HistoriaClinica HClinica = new HistoriaClinica();
-////                //Transformar foto
-                HClinica.setCodigo(rst.getInt("codigo"));
-                HClinica.setCategoria(rst.getString("categoria"));
-                HClinica.setPaciente(rst.getString("paciente"));
-                HClinica.setCedula(rst.getString("cedula"));
-                HClinica.setImagen(rst.getString("foto"));
-                HClinica.setEdad(rst.getInt("edad"));
-//                lista.add(HClinica);
-                hclinicas.add(HClinica);
-
-            }
-
-        } catch (Exception e) {
-        }
-        return hclinicas;
-    }
+    ObservableList<Paciente> pacientes;
+    ObservableList<Paciente> filtropacientes;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -153,15 +125,44 @@ public class FrmPrincipalController implements Initializable {
         getHora(); // obterner hora actual
 
         // cargar columnas
-        this.clmCategoria.setCellValueFactory(new PropertyValueFactory<HistoriaClinica, String>("categoria"));
-        this.clmHclinica.setCellValueFactory(new PropertyValueFactory<HistoriaClinica, Integer>("codigo"));
-        this.clmNombre.setCellValueFactory(new PropertyValueFactory<HistoriaClinica, String>("paciente"));
-        this.clmCedula.setCellValueFactory(new PropertyValueFactory<HistoriaClinica, String>("cedula"));
-        this.clmEdad.setCellValueFactory(new PropertyValueFactory<HistoriaClinica, Integer>("edad"));
-        this.clmFoto.setCellValueFactory(new PropertyValueFactory<HistoriaClinica, String>("imagen"));
+        this.clmCategoria.setCellValueFactory(new PropertyValueFactory<Paciente, String>("categoria"));
+        this.clmHclinica.setCellValueFactory(new PropertyValueFactory<Paciente, Integer>("numerohc"));
+        this.clmNombre.setCellValueFactory(new PropertyValueFactory<Paciente, String>("nombre"));
+        this.clmApellido.setCellValueFactory(new PropertyValueFactory<Paciente, String>("apellidop"));
+        this.clmCedula.setCellValueFactory(new PropertyValueFactory<Paciente, String>("cedula"));
+        this.clmEdad.setCellValueFactory(new PropertyValueFactory<Paciente, Integer>("edad"));
+        this.clmFoto.setCellValueFactory(new PropertyValueFactory<Paciente, String>("imagen"));
         this.clmFoto.setVisible(false);
         //llenar tabla
         this.tableSignos.setItems(pacientes);
+    }
+
+    private ObservableList<Paciente> cargarTabla() {
+
+        ObservableList<Paciente> hclinicas = FXCollections.observableArrayList();
+        OperacionHistoriaC ophc = new OperacionHistoriaC();
+        ophc.Conectar();
+        ResultSet rst = ophc.Mostrarpacientes();
+
+        try {
+
+            while (rst.next()) {
+
+                Paciente HClinica = new Paciente();
+                HClinica.setNumerohc(rst.getInt("numhclinic"));
+                HClinica.setCategoria(rst.getString("categoria"));
+                HClinica.setNombre(rst.getString("nombre"));
+                HClinica.setApellidop(rst.getString("apellido_p"));
+                HClinica.setCedula(rst.getString("cedula"));
+                HClinica.setImagen(rst.getString("foto"));
+                HClinica.setEdad(rst.getInt("edad"));
+                hclinicas.add(HClinica);
+
+            }
+
+        } catch (Exception e) {
+        }
+        return hclinicas;
     }
 
     public void setFirstname(String firstNameString) {
@@ -196,8 +197,8 @@ public class FrmPrincipalController implements Initializable {
 
             this.filtropacientes.clear();
 
-            for (HistoriaClinica paciente : pacientes) {
-                if (paciente.getPaciente().toLowerCase().contains(filtroNombre.toLowerCase())) {
+            for (Paciente paciente : pacientes) {
+                if (paciente.getNombre().toLowerCase().contains(filtroNombre.toLowerCase())) {
                     this.filtropacientes.add(paciente);
 
                 }
@@ -207,6 +208,7 @@ public class FrmPrincipalController implements Initializable {
     }
 
     void getHora() {
+
         LocalDateTime locaDate = LocalDateTime.now();
         String hours = Integer.toString(locaDate.getHour());
         String minutes = Integer.toString(locaDate.getMinute());
@@ -217,20 +219,40 @@ public class FrmPrincipalController implements Initializable {
 
     @FXML
     private void newUser(ActionEvent event) {
-  
-        try {
-            Stage newUser = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/frmnuevoPaciente.fxml"));
 
+        try {
+            // Cargo la vista
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/frmnuevoPaciente.fxml"));
+
+            // Cargo la ventana
+            Parent root = loader.load();
+
+            // instanciar el controlador y enviar los datos de la tabla al 
+            //controlador 2 para verificar si la persona existe
+            FrmnuevoPacienteController controlador = loader.getController();
+            controlador.initAttributtes(pacientes);
+
+            // Creo el Scene
             Scene scene = new Scene(root);
-            newUser.setScene(scene);
-            newUser.show();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+            
+            //cargar la tabla con el nuevo paciente ingresado
+            this.pacientes = cargarTabla();     
+            this.tableSignos.setItems(pacientes);
+            this.tableSignos.refresh();
         } catch (IOException ex) {
             Logger.getLogger(FrmPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-       
     }
-    
-    
+
+    @FXML
+    private void tableUpdate(ActionEvent event) {
+        // Refresco la tabla
+        this.tableSignos.refresh();
+    }
+
 }

@@ -1,43 +1,227 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="401.0" prefWidth="800.0" style="-fx-background-radius: 20;" styleClass="pane" stylesheets="@../styles/frmregistrar.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.boot.controller.FrmRegistrarController">
-   <children>
-      <Label layoutX="313.0" layoutY="6.0" text=" NUEVA CUENTA" textFill="WHITE">
+<AnchorPane id="AnchorPane" prefHeight="580.0" prefWidth="800.0" style="-fx-background-radius: 20; -fx-background-color: #FEFEFE;" styleClass="pane" stylesheets="@../styles/frmregistrar.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.boot.controller.FrmRegistrarController">
+    <children>
+        <Pane layoutX="2.0" layoutY="4.0" prefHeight="574.0" prefWidth="400.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #64748E;" AnchorPane.topAnchor="3.0">
+            <children>
+                <GridPane alignment="CENTER" layoutX="71.0" layoutY="117.0" prefHeight="275.0" prefWidth="271.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <JFXTextField fx:id="txtUsernamedoc" alignment="CENTER" focusColor="#eeeeee" labelFloat="true" prefHeight="25.0" prefWidth="187.0" promptText="Nombre y Apellido" styleClass="jfxbutton" stylesheets="@../styles/frmregistrar.css" unFocusColor="#92abce" GridPane.valignment="BOTTOM" />
+                        <JFXTextField fx:id="txtEspecialidaddoc" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="25.0" prefWidth="187.0" promptText="Especialidad" styleClass="jfxbutton" stylesheets="@../styles/frmregistrar.css" unFocusColor="#92abce" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                        <JFXTextField fx:id="txtMaildoc" alignment="CENTER" focusColor="#e8e8e8" labelFloat="true" prefHeight="25.0" prefWidth="187.0" promptText="example@email.com" styleClass="jfxbutton" stylesheets="@../styles/frmregistrar.css" unFocusColor="#92abce" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                        <JFXTextField fx:id="txtDirecciondoc" alignment="CENTER" focusColor="WHITE" labelFloat="true" prefHeight="25.0" prefWidth="187.0" promptText="Direccion" styleClass="jfxbutton" stylesheets="@../styles/frmregistrar.css" unFocusColor="#92abce" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
+                        <JFXTextField fx:id="txtTelefonodoc" alignment="CENTER" focusColor="WHITE" labelFloat="true" promptText="Telefono" styleClass="jfxbutton" stylesheets="@../styles/frmregistrar.css" unFocusColor="#92abce" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
+                  <JFXTextField alignment="CENTER" focusColor="WHITE" promptText="Cedula" styleClass="jfxbutton" unFocusColor="#92abce" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
+                    </children>
+                </GridPane>
+                <Label layoutX="176.0" layoutY="415.0" text="Genero" textFill="#f9b17a" />
+                <GridPane layoutX="99.0" layoutY="440.0" prefHeight="30.0" prefWidth="216.0">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <JFXRadioButton fx:id="rdbtnMdoc" text="M" textFill="#e1dedc">
+                            <unSelectedColor>
+                                <Color red="1.0" green="1.0" blue="1.0" />
+                            </unSelectedColor>
+                            <selectedColor>
+                                <Color red="0.9764705896377563" green="0.6941176652908325" blue="0.47843137383461" />
+                            </selectedColor>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="radbtnGrupGDoc" />
+                     </toggleGroup>
+                        </JFXRadioButton>
+                        <JFXRadioButton fx:id="rdbtnFdoc" text="F" textFill="#e1dedc" toggleGroup="$radbtnGrupGDoc" GridPane.columnIndex="1">
+                            <unSelectedColor>
+                                <Color red="1.0" green="1.0" blue="1.0" />
+                            </unSelectedColor>
+                            <selectedColor>
+                                <Color red="0.9764705896377563" green="0.6941176652908325" blue="0.47843137383461" />
+                            </selectedColor>
+                        </JFXRadioButton>
+                        <JFXRadioButton fx:id="rdbtnLGBTIdoc" text="LGBTI" textFill="#e1dedc" toggleGroup="$radbtnGrupGDoc" GridPane.columnIndex="2">
+                            <unSelectedColor>
+                                <Color red="1.0" green="1.0" blue="1.0" />
+                            </unSelectedColor>
+                            <selectedColor>
+                                <Color red="0.9764705896377563" green="0.6941176652908325" blue="0.47843137383461" />
+                            </selectedColor>
+                        </JFXRadioButton>
+                    </children>
+                </GridPane>
+            <Text fill="#eeeeee" fontSmoothingType="LCD" layoutX="71.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="CREAR CUENTA COMO MEDICO" textAlignment="CENTER">
+               <font>
+                  <Font name="Liberation Serif" size="17.0" />
+               </font>
+            </Text>
+                  <JFXPasswordField fx:id="txtPassworddoc" focusColor="#f8f8f8" labelFloat="true" layoutX="18.0" layoutY="492.0" prefHeight="26.0" prefWidth="165.0" promptText="Password" styleClass="jfxbutton" stylesheets="@../styles/frmregistrar.css" unFocusColor="WHITE" />
+                  <JFXPasswordField fx:id="txtConfPassword" focusColor="WHITE" labelFloat="true" layoutX="222.0" layoutY="491.0" prefHeight="26.0" prefWidth="165.0" promptText="Confirmar Password" styleClass="jfxbutton" stylesheets="@../styles/frmregistrar.css" unFocusColor="WHITE" />
+              <JFXButton fx:id="btnRegistrardoc" layoutX="127.0" layoutY="542.0" onAction="#getRegister" prefWidth="159.0" ripplerFill="#476d8a" style="-fx-background-color: #3b4859; -fx-background-radius: 10;" text="Registrarse" textFill="WHITE">
+                  <font>
+                      <Font name="Liberation Serif" size="15.0" />
+                  </font>
+                  <cursor>
+                      <Cursor fx:constant="HAND" />
+                  </cursor>
+              </JFXButton>
+            <GridPane layoutX="100.0" layoutY="57.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <ImageView fitHeight="76.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                     <image>
+                        <Image url="@../images/doctora.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="76.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/doctor.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </GridPane>
+            <MFXToggleButton fx:id="btnActivedoc" automaticColorAdjustment="true" contentDisplay="GRAPHIC_ONLY" layoutX="319.0" layoutY="35.0" />
+            </children>
+        </Pane>
+      <Text fill="#080f25" fontSmoothingType="LCD" layoutX="494.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREAR CUENTA ENFERMERIA" textAlignment="CENTER">
          <font>
-            <Font name="Amiri Bold" size="23.0" />
+            <Font name="Liberation Serif" size="17.0" />
          </font>
-      </Label>
-      <JFXComboBox fx:id="cbboxTipo" labelFloat="true" layoutX="346.0" layoutY="57.0" promptText="Tipo de cuenta" />
-      <JFXTextField fx:id="txtUsername" labelFloat="true" layoutX="196.0" layoutY="105.0" prefHeight="25.0" prefWidth="187.0" promptText="Nombre y Apellido" stylesheets="@../styles/frmregistrar.css" />
-      <JFXTextField fx:id="txtMail" labelFloat="true" layoutX="439.0" layoutY="102.0" prefHeight="25.0" prefWidth="187.0" promptText="example@email.com" stylesheets="@../styles/frmregistrar.css" />
-      <JFXTextField fx:id="txtEspecialidad" labelFloat="true" layoutX="196.0" layoutY="153.0" prefHeight="25.0" prefWidth="187.0" promptText="Especialidad" stylesheets="@../styles/frmregistrar.css" />
-      <JFXTextField fx:id="txtDireccion" labelFloat="true" layoutX="439.0" layoutY="153.0" prefHeight="25.0" prefWidth="187.0" promptText="Direccion" stylesheets="@../styles/frmregistrar.css" />
-      <JFXTextField fx:id="txtTelefono" labelFloat="true" layoutX="196.0" layoutY="213.0" promptText="Telefono" stylesheets="@../styles/frmregistrar.css" />
-      <Label layoutX="512.0" layoutY="192.0" text="Genero" />
-      <JFXRadioButton fx:id="btnM" layoutX="439.0" layoutY="219.0" text="M" />
-      <JFXRadioButton fx:id="btnF" layoutX="500.0" layoutY="219.0" text="F" />
-      <JFXRadioButton fx:id="btnLGBTI" layoutX="561.0" layoutY="219.0" text="LGBTI" />
-      <DatePicker fx:id="btnFecha" layoutX="196.0" layoutY="274.0" promptText="Fecha de Registro" style="-fx-background-color: transparent;" />
-      <JFXPasswordField fx:id="TxtPassword" labelFloat="true" layoutX="439.0" layoutY="261.0" promptText="Password" stylesheets="@../styles/frmregistrar.css" />
-      <JFXPasswordField fx:id="txtConfPassword" labelFloat="true" layoutX="439.0" layoutY="300.0" promptText="Confirmar Password" stylesheets="@../styles/frmregistrar.css" />
-      <JFXButton fx:id="btnRegistrar" layoutX="333.0" layoutY="347.0" prefHeight="34.0" prefWidth="159.0" ripplerFill="#476d8a" style="-fx-background-color: #3b4859; -fx-background-radius: 10;" text="Registrarse" textFill="WHITE">
+      </Text>
+      <GridPane layoutX="465.0" layoutY="144.0" prefHeight="214.0" prefWidth="295.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <JFXTextField fx:id="cedulaEnf" alignment="CENTER" labelFloat="true" promptText="Cedula" styleClass="jfxbuttonEnf" GridPane.rowIndex="1" />
+            <JFXTextField fx:id="mailEnf" alignment="CENTER" labelFloat="true" promptText="example@email.com" styleClass="jfxbuttonEnf" GridPane.rowIndex="2" />
+            <JFXTextField fx:id="direccionEnf" alignment="CENTER" labelFloat="true" promptText="Direccion" styleClass="jfxbuttonEnf" GridPane.rowIndex="3" />
+            <JFXTextField fx:id="telefonoEnf" alignment="CENTER" labelFloat="true" promptText="Telefono" styleClass="jfxbuttonEnf" GridPane.rowIndex="4" />
+            <JFXTextField fx:id="nombreEnf" alignment="CENTER" labelFloat="true" promptText="Nombre y Apellido" styleClass="jfxbuttonEnf" />
+            <JFXTextField fx:id="recuperarEnf" styleClass="jfxbuttonEnf" text="Recuperar cuenta : Ejmp nombre de mi perro" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
+         </children>
+      </GridPane>
+      <MFXButton layoutX="539.0" layoutY="544.0" prefWidth="159.0" style="-fx-background-color: #3CB15B;" text="Registrarse" textFill="#f5ecec">
          <font>
-            <Font size="15.0" />
+            <Font name="Liberation Serif" size="15.0" />
          </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
-   </children>
+      </MFXButton>
+      <GridPane layoutX="525.0" layoutY="63.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ImageView fitHeight="76.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+               <image>
+                  <Image url="@../images/doctora.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="76.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/doctor.png" />
+               </image>
+            </ImageView>
+         </children>
+      </GridPane>
+      <MFXToggleButton fx:id="btnActiveenf" automaticColorAdjustment="true" contentDisplay="GRAPHIC_ONLY" layoutX="412.0" layoutY="41.0" rotate="180.0" />
+      <GridPane layoutX="504.0" layoutY="427.0" prefHeight="30.0" prefWidth="216.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <RadioButton fx:id="btnMenf" mnemonicParsing="false" text="M">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tggrupGeneroEnf" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="btnFenf" mnemonicParsing="false" text="F" toggleGroup="$tggrupGeneroEnf" GridPane.columnIndex="1" />
+            <RadioButton fx:id="btnlgbtiEnf" mnemonicParsing="false" text="LGBTI" toggleGroup="$tggrupGeneroEnf" GridPane.columnIndex="2" />
+         </children>
+      </GridPane>
+      <Label layoutX="588.0" layoutY="405.0" text="Genero" textFill="#6f4221" />
+      <GridPane fx:id="passEnf" layoutX="433.0" layoutY="480.0" prefHeight="43.0" prefWidth="342.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <JFXPasswordField fx:id="confpassEnf" labelFloat="true" promptText="Confirmar Password" styleClass="jfxbuttonEnf" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </JFXPasswordField>
+            <JFXPasswordField fx:id="jtxt" labelFloat="true" prefWidth="147.0" promptText="Password" styleClass="jfxbuttonEnf" GridPane.valignment="BOTTOM">
+               <opaqueInsets>
+                  <Insets right="10.0" />
+               </opaqueInsets>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </JFXPasswordField>
+         </children>
+      </GridPane>
+    </children>
 </AnchorPane>

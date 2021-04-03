@@ -5,3 +5,34 @@
 .mainFxmlClass {
 
 }
+.titles{
+    -fx-fill : #1473e6;
+    -fx-font-weight: bold
+}
+.AnchorPane{
+    -fx-background-color: #ffffff;
+    -fx-background-radius:20px
+      
+}
+.btninput{
+    -jfx-focus-color:#2196F3;
+    -jfx-unfocus-color:#17A2B8;
+    -fx-font-size:12px;
+}
+.btniacction{
+    -jfx-focus-color:#00505f;
+    
+    
+}
+.imgProfile{
+    -fx-background-color: background;
+    -fx-border-color: #2196F3
+    
+}
+.btncamera{
+    -fx-background-radius:20px
+    
+}
+
+
+

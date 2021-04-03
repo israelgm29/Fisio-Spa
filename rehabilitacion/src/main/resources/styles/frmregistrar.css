@@ -6,13 +6,24 @@
 
 }
 
-.pane{ -fx-background-image: url("/images/fondo2.png");
-       -fx-background-repeat: stretch; 
-       -fx-background-size: 900 506; 
-       -fx-background-position: center center; 
-       -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
-} 
+
 .button-raised{
-    
+
     -fx-text-fill: WHITE;
+}
+.panel{
+
+
+}
+
+.jfxbutton{
+    -fx-text-fill: #EEEEEE;
+    -fx-prompt-text-fill: #EEEEEE;
+    -fx-font-size: 12px
+}
+
+.jfxbuttonEnf{
+    -fx-text-fill: #03847B;
+    -jfx-focus-color:#3CB15B;
+    -fx-font-size: 12px
 }
